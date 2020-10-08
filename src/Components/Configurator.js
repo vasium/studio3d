@@ -647,13 +647,20 @@ function Configurator() {
 
     // var theBLob = URL.createObjectURL(blob);
     var finalBlob = URL.createObjectURL(blob) + '.gltf';
-
+    console.log(finalBlob);
     link.href =
       'intent://arvr.google.com/scene-viewer/1.1?file=' +
-      encodeURIComponent('https://studio3d.netlify.app/box.gltf') +
+      encodeURIComponent(finalBlob) +
       '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
 
     link.click();
+
+    // link.href =
+    //   'intent://arvr.google.com/scene-viewer/1.1?file=' +
+    //   encodeURIComponent('https://studio3d.netlify.app/box.gltf') +
+    //   '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
+
+    // link.click();
 
     // link.href = URL.createObjectURL(blob);
     // link.href = 'https://www.google.com';
