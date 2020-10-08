@@ -645,12 +645,12 @@ function Configurator() {
     // link.download = filename;
     // link.click();
 
-    var theBLob = URL.createObjectURL(blob);
+    // var theBLob = URL.createObjectURL(blob);
     var finalBlob = URL.createObjectURL(blob) + '.gltf';
 
     link.href =
       'intent://arvr.google.com/scene-viewer/1.1?file=' +
-      encodeURIComponent(finalBlob) +
+      encodeURIComponent('https://studio3d.netlify.app/box.gltf') +
       '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
 
     link.click();
