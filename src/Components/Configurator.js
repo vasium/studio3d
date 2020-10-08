@@ -9,7 +9,7 @@ function Configurator() {
   const LOADER = document.getElementById('js-loader');
   const TRAY = document.getElementById('js-tray-slide');
   const DRAG_NOTICE = document.getElementById('js-drag-notice');
-  const MODEL_PATH = 'chair_maya.glb';
+  const MODEL_PATH = 'box.gltf';
   const BACKGROUND_COLOR = 0xf1f1f1;
   const canvas = document.querySelector('#c');
   const gltfModel = 'chair.gltf';
@@ -636,7 +636,7 @@ function Configurator() {
   }
   var link = document.createElement('a');
   link.style.display = 'none';
-  document.body.appendChild(link);
+  // document.body.appendChild(link);
 
   // document.body.appendChild(link); // Firefox workaround, see #6594
 
