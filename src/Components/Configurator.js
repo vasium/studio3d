@@ -593,115 +593,39 @@ function Configurator() {
   // console.log('Hi' + exportLink);
   // console.log(exportBlob);
 
+  var link = document.createElement('a');
+  link.style.display = 'none';
+
   function exportGLTF() {
     var gltfExporter = new GLTFExporter();
 
-    var options = {
-      trs: true,
-      onlyVisible: true,
-      truncateDrawRange: true,
-      binary: true,
-      forcePowerOfTwoTextures: true,
-      maxTextureSize: 4096 || Infinity, // To prevent NaN value
-    };
-
     gltfExporter.parse(
-      // loadedModel,
       scene,
       function (result) {
-        if (result instanceof ArrayBuffer) {
-          saveArrayBuffer(result, 'scene.glb');
-        } else {
-          var obj = { name: 'John', age: 30, city: 'New York' };
-          console.log('result: ' + result + obj.name);
-          var output = JSON.stringify(result, null, 2);
-          // console.log(scene);
-          // console.log('output: ' + output);
-
-          // saveString(output, 'scene.gltf');
-          save(new Blob([output], { type: 'text/plain' }), 'scene.gltf');
-
-          //          // your axios call here
-          //    localStorage.setItem("pageData", "Data Retrieved from axios request")
-          //    // route to new page by changing window.location
-          //    window.open(newPageUrl, "_blank") //to open new page
-
-          // <a href="intent://arvr.google.com/scene-viewer/1.0?
-          // file=https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Avocado/glTF/Avocado.gltf
-          // #Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://developers.google.com/ar;end;">Avocado</a>
-        }
+        console.log('Hej');
+        var output = JSON.stringify(result, null, 2);
+        saveString(output, 'scene.gltf');
       },
       options
     );
   }
-  var link = document.createElement('a');
-  link.style.display = 'none';
-  // document.body.appendChild(link);
 
-  // document.body.appendChild(link); // Firefox workaround, see #6594
-
-  function save(blob, filename) {
-    // link.href = URL.createObjectURL(blob);
-    // link.download = filename;
-    // link.click();
-
-    // var theBLob = URL.createObjectURL(blob);
-    var finalBlob = URL.createObjectURL(blob) + '.gltf';
-    console.log(finalBlob);
-    link.href =
-      'intent://arvr.google.com/scene-viewer/1.1?file=' +
-      encodeURIComponent('https://studio3d.netlify.app/box.gltf') +
-      '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
-
-    link.click();
-
-    // link.href =
-    //   'intent://arvr.google.com/scene-viewer/1.1?file=' +
-    //   encodeURIComponent('https://studio3d.netlify.app/box.gltf') +
-    //   '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
-
-    // link.click();
-
-    // link.href = URL.createObjectURL(blob);
-    // link.href = 'https://www.google.com';
-    // link.href =
-    //   'intent://arvr.google.com/scene-viewer/1.1?file=' +
-    //   encodedUrl +
-    //   '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
-
-    // console.log('blob: ' + blob);
-    // var theBLob = URL.createObjectURL(blob);
-    // var loadedBlob = fetch(theBLob);
-    // var savedFileUrl = theBLob + filename;
-    // console.log('savedFileUrl: ' + savedFileUrl);
-
-    // var encodedUrl = encodeURIComponent(savedFileUrl);
-
-    // console.log('encodedUrl: ' + encodedUrl);
-
-    // link.href = theBLob;
-    // // 'intent://arvr.google.com/scene-viewer/1.1?file=' +
-    // // encodedUrl +
-    // // '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;';
-
-    // // link.download = filename;
-    // console.log('link: ' + link);
-    // console.log('link.hreff: ' + link.href);
-
-    // // var url = 'http://localhost/' + encodeURIComponent(link.download);
-    // // console.log(url);
-
-    // link.click();
-
-    // // URL.revokeObjectURL( url ); breaks Firefox...
+  function saveString(text, filename) {
+    save(new Blob([text], { type: 'application/json' }), filename);
   }
 
-  // function saveString(text, filename) {
-  //   save(new Blob([text], { type: 'text/plain' }), filename);
-  // }
-
-  function saveArrayBuffer(buffer, filename) {
-    save(new Blob([buffer], { type: 'application/octet-stream' }), filename);
+  function save(blob) {
+    var reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend = function () {
+      var base64data = reader.result;
+      console.log(base64data);
+      link.href =
+        'intent://arvr.google.com/scene-viewer/1.1?file=' +
+        base64data +
+        '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
+      link.click();
+    };
   }
 
   // === THREE.JS EXAMPLE CODE END ===
