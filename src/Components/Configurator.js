@@ -615,17 +615,17 @@ function Configurator() {
   }
 
   function save(blob) {
-    var reader = new FileReader();
-    reader.readAsDataURL(blob);
-    reader.onloadend = function () {
-      var base64data = reader.result;
-      console.log(base64data);
-      link.href =
-        'intent://arvr.google.com/scene-viewer/1.1?file=' +
-        base64data +
-        '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
-      link.click();
-    };
+    // var reader = new FileReader();
+    // reader.readAsDataURL(blob);
+    // reader.onloadend = function () {
+    //   var base64data = reader.result;
+    //   console.log(base64data);
+    // };
+    link.href =
+      'intent://arvr.google.com/scene-viewer/1.1?file=' +
+      URL.createObjectURL(blob) +
+      '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
+    link.click();
   }
 
   // === THREE.JS EXAMPLE CODE END ===
