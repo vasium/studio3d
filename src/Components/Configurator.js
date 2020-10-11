@@ -450,6 +450,8 @@ function Configurator() {
     activeOption = e.target.dataset.option;
     if (activeOption == 'Export') {
       exportGLTF();
+    } else if (activeOption == 'Test') {
+      exportGLTF1();
     } else {
       for (const otherOption of options) {
         otherOption.classList.remove('--is-active');
@@ -594,6 +596,7 @@ function Configurator() {
   // console.log('Hi' + exportLink);
   // console.log(exportBlob);
 
+  var link1 = document.createElement('a');
   var link = document.createElement('a');
   link.style.display = 'none';
 
@@ -609,6 +612,30 @@ function Configurator() {
       },
       options
     );
+  }
+
+  function exportGLTF1() {
+    var gltfExporter = new GLTFExporter();
+
+    gltfExporter.parse(
+      scene,
+      function (result) {
+        console.log('Hej');
+        var output = JSON.stringify(result, null, 2);
+        saveString1(output, 'scene.gltf');
+      },
+      options
+    );
+  }
+  function saveString1(text, filename) {
+    save1(new Blob([text], { type: 'application/json' }), filename);
+  }
+
+  function save1(blob) {
+    var myBlob = URL.createObjectURL(blob);
+
+    document.getElementById('bbb').src = myBlob;
+    link1.click();
   }
 
   function saveString(text, filename) {
