@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import '@google/model-viewer/dist/model-viewer';
 
 function Configurator() {
   // === THREE.JS CODE START ===
@@ -615,22 +616,19 @@ function Configurator() {
   }
 
   function save(blob) {
-    var reader = new FileReader();
-    reader.readAsDataURL(blob);
-    reader.onloadend = function () {
-      var base64data = reader.result;
-      console.log(base64data);
-      link.href =
-        'intent://arvr.google.com/scene-viewer/1.1?file=' +
-        base64data +
-        '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
-      link.click();
-    };
+    var myBlob = URL.createObjectURL(blob);
+
+    document.getElementById('bbb').src = myBlob;
+    link.href =
+      'intent://arvr.google.com/scene-viewer/1.1?file=' +
+      URL.createObjectURL(blob) +
+      '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
+    link.click();
   }
 
   // === THREE.JS EXAMPLE CODE END ===
 
-  return <div>{/* <h1>Heloooooo</h1> */}</div>;
+  return <div></div>;
 }
 
 export default Configurator;
