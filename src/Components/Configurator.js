@@ -7,13 +7,13 @@ import '@google/model-viewer/dist/model-viewer';
 
 function Configurator() {
   // === THREE.JS CODE START ===
-  const LOADER = document.getElementById('js-loader');
-  const TRAY = document.getElementById('js-tray-slide');
-  const DRAG_NOTICE = document.getElementById('js-drag-notice');
-  const MODEL_PATH = 'box.gltf';
-  const BACKGROUND_COLOR = 0xf1f1f1;
-  const canvas = document.querySelector('#c');
-  const gltfModel = 'chair.gltf';
+  const spinningLoader = document.getElementById('js-loader');
+  const tray = document.getElementById('js-tray-slide');
+  const dragNotice = document.getElementById('js-drag-notice');
+  const modelPath = 'chair.gltf';
+  const backgroundColor = 0xf1f1f1;
+  const canvas = document.getElementById('canvas');
+  // const canvas = document.querySelector('#c');
 
   var theModel;
   var activeOption = 'Metal';
@@ -74,194 +74,14 @@ function Configurator() {
     {
       color: '97a1a7',
     },
-
-    {
-      color: 'acb4b9',
-    },
-
-    {
-      color: 'DF9998',
-    },
-
-    {
-      color: '7C6862',
-    },
-
-    {
-      color: 'A3AB84',
-    },
-
-    {
-      color: 'D6CCB1',
-    },
-
-    {
-      color: 'F8D5C4',
-    },
-
-    {
-      color: 'A3AE99',
-    },
-
-    {
-      color: 'EFF2F2',
-    },
-
-    {
-      color: 'B0C5C1',
-    },
-
-    {
-      color: '8B8C8C',
-    },
-
-    {
-      color: '565F59',
-    },
-
-    {
-      color: 'CB304A',
-    },
-
-    {
-      color: 'FED7C8',
-    },
-
-    {
-      color: 'C7BDBD',
-    },
-
-    {
-      color: '3DCBBE',
-    },
-
-    {
-      color: '264B4F',
-    },
-
-    {
-      color: '389389',
-    },
-
-    {
-      color: '85BEAE',
-    },
-
-    {
-      color: 'F2DABA',
-    },
-
-    {
-      color: 'F2A97F',
-    },
-
-    {
-      color: 'D85F52',
-    },
-
-    {
-      color: 'D92E37',
-    },
-
-    {
-      color: 'FC9736',
-    },
-
-    {
-      color: 'F7BD69',
-    },
-
-    {
-      color: 'A4D09C',
-    },
-
-    {
-      color: '4C8A67',
-    },
-
-    {
-      color: '25608A',
-    },
-
-    {
-      color: '75C8C6',
-    },
-
-    {
-      color: 'F5E4B7',
-    },
-
-    {
-      color: 'E69041',
-    },
-
-    {
-      color: 'E56013',
-    },
-
-    {
-      color: '11101D',
-    },
-
-    {
-      color: '630609',
-    },
-
-    {
-      color: 'C9240E',
-    },
-
-    {
-      color: 'EC4B17',
-    },
-
-    {
-      color: '281A1C',
-    },
-
-    {
-      color: '4F556F',
-    },
-
-    {
-      color: '64739B',
-    },
-
-    {
-      color: 'CDBAC7',
-    },
-
-    {
-      color: '946F43',
-    },
-
-    {
-      color: '66533C',
-    },
-
-    {
-      color: '173A2F',
-    },
-
-    {
-      color: '153944',
-    },
-
-    {
-      color: '27548D',
-    },
-
-    {
-      color: '438AAC',
-    },
   ];
 
   // Init the scene
   const scene = new THREE.Scene();
 
   // Set background
-  scene.background = new THREE.Color(BACKGROUND_COLOR);
-  scene.fog = new THREE.Fog(BACKGROUND_COLOR, 20, 100);
+  scene.background = new THREE.Color(backgroundColor);
+  scene.fog = new THREE.Fog(backgroundColor, 20, 100);
 
   // Init the renderer
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
@@ -271,7 +91,7 @@ function Configurator() {
 
   var cameraFar = 5;
 
-  document.body.appendChild(renderer.domElement);
+  // document.body.appendChild(renderer.domElement);
 
   // Add a camerra
   var camera = new THREE.PerspectiveCamera(
@@ -284,22 +104,22 @@ function Configurator() {
   camera.position.x = 0;
 
   // Initial material
-  const INITIAL_MTL = new THREE.MeshPhongMaterial({
+  const initialMaterial = new THREE.MeshPhongMaterial({
     color: 0xf1f1f1,
     shininess: 10,
   });
 
-  const INITIAL_MAP = [
-    { childID: 'Metal', mtl: INITIAL_MTL },
-    { childID: 'Pillow', mtl: INITIAL_MTL },
-    { childID: 'Wood', mtl: INITIAL_MTL },
+  const initialMap = [
+    { childID: 'Metal', mtl: initialMaterial },
+    { childID: 'Pillow', mtl: initialMaterial },
+    { childID: 'Wood', mtl: initialMaterial },
   ];
 
   // Init the object loader
   var loader = new GLTFLoader();
 
   loader.load(
-    MODEL_PATH,
+    modelPath,
     function (gltf) {
       theModel = gltf.scene;
 
@@ -315,10 +135,10 @@ function Configurator() {
       theModel.rotation.y = Math.PI;
 
       // Offset the y position a bit
-      theModel.position.y = -1;
+      theModel.position.y = 0;
 
       // Set initial textures
-      for (let object of INITIAL_MAP) {
+      for (let object of initialMap) {
         initColor(theModel, object.childID, object.mtl);
       }
 
@@ -326,7 +146,7 @@ function Configurator() {
       scene.add(theModel);
 
       // Remove the loader
-      LOADER.remove();
+      spinningLoader.remove();
     },
     undefined,
     function (error) {
@@ -349,13 +169,14 @@ function Configurator() {
   // Add lights
   var hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.61);
   hemiLight.position.set(0, 50, 0);
+
   // Add hemisphere light to scene
   scene.add(hemiLight);
-
   var dirLight = new THREE.DirectionalLight(0xffffff, 0.54);
   dirLight.position.set(-8, 12, 8);
   dirLight.castShadow = true;
   dirLight.shadow.mapSize = new THREE.Vector2(4096, 4096);
+
   // Add directional Light to scene
   scene.add(dirLight);
 
@@ -387,35 +208,35 @@ function Configurator() {
     renderer.render(scene, camera);
     requestAnimationFrame(animate);
 
-    if (resizeRendererToDisplaySize(renderer)) {
-      const canvas = renderer.domElement;
-      camera.aspect = canvas.clientWidth / canvas.clientHeight;
-      camera.updateProjectionMatrix();
-    }
+    // if (resizeRendererToDisplaySize(renderer)) {
+    //   const canvas = renderer.domElement;
+    //   camera.aspect = canvas.clientWidth / canvas.clientHeight;
+    //   camera.updateProjectionMatrix();
+    // }
 
     if (theModel != null && loaded == false) {
       initialRotation();
-      DRAG_NOTICE.classList.add('start');
+      dragNotice.classList.add('start');
     }
   }
 
   animate();
 
-  // Function - New resizing method
-  function resizeRendererToDisplaySize(renderer) {
-    const canvas = renderer.domElement;
-    var width = window.innerWidth;
-    var height = window.innerHeight;
-    var canvasPixelWidth = canvas.width / window.devicePixelRatio;
-    var canvasPixelHeight = canvas.height / window.devicePixelRatio;
+  // // Function - New resizing method
+  // function resizeRendererToDisplaySize(renderer) {
+  //   const canvas = renderer.domElement;
+  //   var width = window.innerWidth;
+  //   var height = window.innerHeight;
+  //   var canvasPixelWidth = canvas.width / window.devicePixelRatio;
+  //   var canvasPixelHeight = canvas.height / window.devicePixelRatio;
 
-    const needResize =
-      canvasPixelWidth !== width || canvasPixelHeight !== height;
-    if (needResize) {
-      renderer.setSize(width, height, false);
-    }
-    return needResize;
-  }
+  //   const needResize =
+  //     canvasPixelWidth !== width || canvasPixelHeight !== height;
+  //   if (needResize) {
+  //     renderer.setSize(width, height, false);
+  //   }
+  //   return needResize;
+  // }
 
   // Function - Build Colors
 
@@ -431,7 +252,7 @@ function Configurator() {
       }
 
       swatch.setAttribute('data-key', i);
-      TRAY.append(swatch);
+      tray.append(swatch);
     }
   }
 
@@ -442,22 +263,23 @@ function Configurator() {
 
   for (const option of options) {
     option.addEventListener('click', selectOption);
+    option.addEventListener('click', dexportGLTF);
   }
 
   function selectOption(e) {
     // console.log(e);
     let option = e.target;
     activeOption = e.target.dataset.option;
-    if (activeOption == 'Export') {
-      exportGLTF();
-    } else if (activeOption == 'Test') {
-      exportGLTF1();
-    } else {
-      for (const otherOption of options) {
-        otherOption.classList.remove('--is-active');
-      }
-      option.classList.add('--is-active');
+    // if (activeOption == 'Export') {
+    //   exportGLTF();
+    // } else if (activeOption == 'Test') {
+    //   exportGLTF1();
+    // } else {
+    for (const otherOption of options) {
+      otherOption.classList.remove('--is-active');
     }
+    option.classList.add('--is-active');
+    // }
   }
 
   // Swatches
@@ -465,6 +287,7 @@ function Configurator() {
 
   for (const swatch of swatches) {
     swatch.addEventListener('click', selectSwatch);
+    swatch.addEventListener('click', dexportGLTF);
   }
 
   function selectSwatch(e) {
@@ -584,19 +407,15 @@ function Configurator() {
 
   slide(slider, sliderItems);
 
-  // document
-  //   .getElementById('export_object')
-  //   .addEventListener('click', function () {
-  //     exportGLTF();
-  //   });
+  document.getElementById('ar').addEventListener('click', function () {
+    exportGLTF();
+  });
 
-  // const exportLink = document.getElementById('Export');
-  // const exportBlob = new Blob(['Hello', 'Download'], { type: 'text/plain' });
-  // // exportLink.href = URL.createObjectURL(exportBlob);
-  // console.log('Hi' + exportLink);
-  // console.log(exportBlob);
+  // document.getElementById('test').addEventListener('click', function () {
+  //   exportGLTF1();
+  // });
 
-  var link1 = document.createElement('a');
+  // var link1 = document.createElement('a');
   var link = document.createElement('a');
   link.style.display = 'none';
 
@@ -614,30 +433,6 @@ function Configurator() {
     );
   }
 
-  function exportGLTF1() {
-    var gltfExporter = new GLTFExporter();
-
-    gltfExporter.parse(
-      scene,
-      function (result) {
-        console.log('Hej');
-        var output = JSON.stringify(result, null, 2);
-        saveString1(output, 'scene.gltf');
-      },
-      options
-    );
-  }
-  function saveString1(text, filename) {
-    save1(new Blob([text], { type: 'application/json' }), filename);
-  }
-
-  function save1(blob) {
-    var myBlob = URL.createObjectURL(blob);
-
-    document.getElementById('bbb').src = myBlob;
-    link1.click();
-  }
-
   function saveString(text, filename) {
     save(new Blob([text], { type: 'application/json' }), filename);
   }
@@ -645,13 +440,45 @@ function Configurator() {
   function save(blob) {
     var myBlob = URL.createObjectURL(blob);
 
-    document.getElementById('bbb').src = myBlob;
-    link.href =
-      'intent://arvr.google.com/scene-viewer/1.1?file=' +
-      URL.createObjectURL(blob) +
-      '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
+    document.getElementById('model-display').src = myBlob;
+    // link.href =
+    //   'intent://arvr.google.com/scene-viewer/1.1?file=' +
+    //   URL.createObjectURL(blob) +
+    //   '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
     link.click();
   }
+
+  function dexportGLTF() {
+    setTimeout(doSomething, 100);
+
+    function doSomething() {
+      exportGLTF();
+    }
+  }
+  dexportGLTF();
+  // function exportGLTF1() {
+  //   var gltfExporter = new GLTFExporter();
+
+  //   gltfExporter.parse(
+  //     scene,
+  //     function (result) {
+  //       console.log('Hej');
+  //       var output = JSON.stringify(result, null, 2);
+  //       saveString1(output, 'scene.gltf');
+  //     },
+  //     options
+  //   );
+  // }
+  // function saveString1(text, filename) {
+  //   save1(new Blob([text], { type: 'application/json' }), filename);
+  // }
+
+  // function save1(blob) {
+  //   var myBlob = URL.createObjectURL(blob);
+
+  //   document.getElementById('model-display').src = myBlob;
+  //   link1.click();
+  // }
 
   // === THREE.JS EXAMPLE CODE END ===
 
@@ -659,6 +486,3 @@ function Configurator() {
 }
 
 export default Configurator;
-
-// intent://arvr.google.com/scene-viewer/1.1?file=blob%3Ahttp%3A%2F%2Flocalhost%3A3000%2F06e8406a-c76e-4247-8277-2006104c93e0scene.gltf&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end
-// intent://arvr.google.com/scene-viewer/1.1?file=blob:http://localhost:3000/5d96356e-295a-49c6-87b9-e314a5a92653&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end
