@@ -147,6 +147,8 @@ function Configurator() {
 
       // Remove the loader
       spinningLoader.remove();
+
+      exportGLTF();
     },
     undefined,
     function (error) {
@@ -263,7 +265,7 @@ function Configurator() {
 
   for (const option of options) {
     option.addEventListener('click', selectOption);
-    option.addEventListener('click', dexportGLTF);
+    // option.addEventListener('click', dexportGLTF);
   }
 
   function selectOption(e) {
@@ -287,16 +289,14 @@ function Configurator() {
 
   for (const swatch of swatches) {
     swatch.addEventListener('click', selectSwatch);
-    swatch.addEventListener('click', dexportGLTF);
   }
 
-  function selectSwatch(e) {
+  async function selectSwatch(e) {
     let color = colors[parseInt(e.target.dataset.key)];
     let new_mtl;
 
     if (color.texture) {
-      let txt = new THREE.TextureLoader().load(color.texture);
-
+      let txt = new THREE.TextureLoader().load(color.texture, exportGLTF);
       txt.repeat.set(color.size[0], color.size[1], color.size[2]);
       txt.wrapS = THREE.RepeatWrapping;
       txt.wrapT = THREE.RepeatWrapping;
@@ -305,14 +305,15 @@ function Configurator() {
         map: txt,
         shininess: color.shininess ? color.shininess : 10,
       });
+      setMaterial(theModel, activeOption, new_mtl);
     } else {
       new_mtl = new THREE.MeshPhongMaterial({
         color: parseInt('0x' + color.color),
         shininess: color.shininess ? color.shininess : 10,
       });
+      setMaterial(theModel, activeOption, new_mtl);
+      exportGLTF();
     }
-
-    setMaterial(theModel, activeOption, new_mtl);
   }
 
   function setMaterial(parent, type, mtl) {
@@ -323,6 +324,7 @@ function Configurator() {
         }
       }
     });
+    // exportGLTF();
   }
 
   // Function - Opening rotate
@@ -419,43 +421,44 @@ function Configurator() {
   var link = document.createElement('a');
   link.style.display = 'none';
 
-  function exportGLTF() {
-    var gltfExporter = new GLTFExporter();
+  var gltfExporter = new GLTFExporter();
 
+  function exportGLTF() {
     gltfExporter.parse(
       theModel,
       function (result) {
-        console.log('Hej');
-        var output = JSON.stringify(result, null, 2);
-        saveString(output, 'scene.gltf');
+        let output = JSON.stringify(result, null, 2);
+        let blob = new Blob([output], { type: 'application/json' });
+        let myBlob = URL.createObjectURL(blob);
+        document.getElementById('model-display').src = myBlob;
       },
       options
     );
   }
 
-  function saveString(text, filename) {
-    save(new Blob([text], { type: 'application/json' }), filename);
-  }
+  // function saveString(text, filename) {
+  //   save(new Blob([text], { type: 'application/json' }), filename);
+  // }
 
-  function save(blob) {
-    var myBlob = URL.createObjectURL(blob);
+  // function save(blob) {
+  //   var myBlob = URL.createObjectURL(blob);
 
-    document.getElementById('model-display').src = myBlob;
-    // link.href =
-    //   'intent://arvr.google.com/scene-viewer/1.1?file=' +
-    //   URL.createObjectURL(blob) +
-    //   '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
-    link.click();
-  }
+  //   document.getElementById('model-display').src = myBlob;
+  //   // link.href =
+  //   //   'intent://arvr.google.com/scene-viewer/1.1?file=' +
+  //   //   URL.createObjectURL(blob) +
+  //   //   '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
+  //   // link.click();
+  // }
 
-  function dexportGLTF() {
-    setTimeout(doSomething, 100);
+  // function dexportGLTF() {
+  //   setTimeout(doSomething, 1000);
+  //   function doSomething() {
+  //     exportGLTF();
+  //   }
+  // }
+  // dexportGLTF();
 
-    function doSomething() {
-      exportGLTF();
-    }
-  }
-  dexportGLTF();
   // function exportGLTF1() {
   //   var gltfExporter = new GLTFExporter();
 
