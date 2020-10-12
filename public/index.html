@@ -81,12 +81,15 @@
   <div class="root" id="root"></div>
 
   <div class="loading" id="js-loader">
+
     <div class="loader"></div>
   </div>
 
-  <span class="drag-notice" id="js-drag-notice">Drag to rotate 360&#176;</span>
+  <!-- <span class="drag-notice" id="js-drag-notice">Drag to rotate 360&#176;</span> -->
 
-  <canvas id="canvas"></canvas>
+  <!-- <canvas id="canvas">
+
+  </canvas> -->
 
   <div class="options">
     <div class="option --is-active" data-option="Metal">
@@ -98,26 +101,33 @@
     <div class="option" data-option="Wood">
       Wood
     </div>
-    <div class="option" id="ar" data-option="Export">
+    <!-- <div class="option" id="ar" data-option="Export">
       AR
-    </div>
+    </div> -->
     <!-- <div class="option" id="test" data-option="Test">
       Test
     </div> -->
     <!-- <div>
       <a href="./box.gltf">Box</a>
     </div> -->
+
   </div>
 
+  <div className="mv">
+    <model-viewer id="model-display" src="" ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed" camera-controls
+      alt="A 3D model" auto-rotate></model-viewer>
+  </div>
   <div class="controls">
+
     <div id="js-tray" class="tray">
-      <div id="js-tray-slide" class="tray__slide"></div>
+
+      <div id="js-tray-slide" class="tray__slide">
+
+      </div>
+
     </div>
 
-    <div>
-      <model-viewer id="model-display" src="" ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto"
-        camera-controls alt="A 3D model" auto-rotate></model-viewer>
-    </div>
+
   </div>
 
 

@@ -84,10 +84,10 @@ function Configurator() {
   scene.fog = new THREE.Fog(backgroundColor, 20, 100);
 
   // Init the renderer
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  // const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 
-  renderer.shadowMap.enabled = true;
-  renderer.setPixelRatio(window.devicePixelRatio);
+  // renderer.shadowMap.enabled = true;
+  // renderer.setPixelRatio(window.devicePixelRatio);
 
   var cameraFar = 5;
 
@@ -194,18 +194,18 @@ function Configurator() {
   // scene.add(floor);
 
   // Add controls
-  var controls = new OrbitControls(camera, renderer.domElement);
-  controls.maxPolarAngle = Math.PI / 2;
-  controls.minPolarAngle = Math.PI / 3;
-  controls.enableDamping = true;
-  controls.enablePan = false;
-  controls.dampingFactor = 0.1;
-  controls.autoRotate = false; // Toggle this if you'd like the chair to automatically rotate
-  controls.autoRotateSpeed = 0.2; // 30
+  // var controls = new OrbitControls(camera, renderer.domElement);
+  // controls.maxPolarAngle = Math.PI / 2;
+  // controls.minPolarAngle = Math.PI / 3;
+  // controls.enableDamping = true;
+  // controls.enablePan = false;
+  // controls.dampingFactor = 0.1;
+  // controls.autoRotate = false; // Toggle this if you'd like the chair to automatically rotate
+  // controls.autoRotateSpeed = 0.2; // 30
 
   function animate() {
-    controls.update();
-    renderer.render(scene, camera);
+    // controls.update();
+    // renderer.render(scene, camera);
     requestAnimationFrame(animate);
 
     // if (resizeRendererToDisplaySize(renderer)) {
@@ -214,10 +214,10 @@ function Configurator() {
     //   camera.updateProjectionMatrix();
     // }
 
-    if (theModel != null && loaded == false) {
-      initialRotation();
-      dragNotice.classList.add('start');
-    }
+    // if (theModel != null && loaded == false) {
+    //   initialRotation();
+    //   dragNotice.classList.add('start');
+    // }
   }
 
   animate();
@@ -407,9 +407,9 @@ function Configurator() {
 
   slide(slider, sliderItems);
 
-  document.getElementById('ar').addEventListener('click', function () {
-    exportGLTF();
-  });
+  // document.getElementById('ar').addEventListener('click', function () {
+  //   exportGLTF();
+  // });
 
   // document.getElementById('test').addEventListener('click', function () {
   //   exportGLTF1();
@@ -423,7 +423,7 @@ function Configurator() {
     var gltfExporter = new GLTFExporter();
 
     gltfExporter.parse(
-      scene,
+      theModel,
       function (result) {
         console.log('Hej');
         var output = JSON.stringify(result, null, 2);
