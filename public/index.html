@@ -67,14 +67,10 @@
 
   <div class="root" id="root"></div>
 
-  <div class="loading" id="js-loader">
-    <div class="loader"></div>
-  </div>
-
-
-
   <div class="mv">
-
+    <div class="loading" id="js-loader">
+      <div class="loader"></div>
+    </div>
     <model-viewer class="mvin" id="model-display" src="" ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto"
       camera-controls alt="A 3D model" auto-rotate>
       <div class="options">
@@ -92,13 +88,15 @@
         </div> -->
       </div>
     </model-viewer>
-  </div>
-  <div class="controls">
-    <div id="js-tray" class="tray">
-      <div id="js-tray-slide" class="tray__slide">
+    <div class="controls">
+      <div id="js-tray" class="tray">
+        <div id="js-tray-slide" class="tray__slide">
+        </div>
       </div>
     </div>
   </div>
+
+
 
 </body>
 
