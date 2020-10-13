@@ -8,20 +8,7 @@
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Web site created using create-react-app" />
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-  <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
   <title>React App</title>
   <link href="https://fonts.googleapis.com/css?family=Raleway:500,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="style.css" />
@@ -81,60 +68,37 @@
   <div class="root" id="root"></div>
 
   <div class="loading" id="js-loader">
-
     <div class="loader"></div>
   </div>
 
-  <!-- <span class="drag-notice" id="js-drag-notice">Drag to rotate 360&#176;</span> -->
 
-  <!-- <canvas id="canvas">
-
-  </canvas> -->
-
-  <div class="options">
-    <div class="option --is-active" data-option="Metal">
-      Metal
-    </div>
-    <div class="option" data-option="Pillow">
-      Pillow
-    </div>
-    <div class="option" data-option="Wood">
-      Wood
-    </div>
-    <!-- <div class="option" id="ar" data-option="Export">
-      AR
-    </div> -->
-    <!-- <div class="option" id="test" data-option="Test">
-      Test
-    </div> -->
-    <!-- <div>
-      <a href="./box.gltf">Box</a>
-    </div> -->
-
-  </div>
 
   <div class="mv">
+
     <model-viewer class="mvin" id="model-display" src="" ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto"
       camera-controls alt="A 3D model" auto-rotate>
-      <!-- <button slot="ar-button"
-        style="background-color: white; border-radius: 4px; border: none; position: absolute; top: 16px; right: 16px; ">
-        👋 Activate AR
-      </button> -->
+      <div class="options">
+        <div class="option --is-active" data-option="Metal">
+          Metal
+        </div>
+        <div class="option" data-option="Pillow">
+          Pillow
+        </div>
+        <div class="option" data-option="Wood">
+          Wood
+        </div>
+        <!-- <div class="option" id="ar" data-option="Export">
+          AR
+        </div> -->
+      </div>
     </model-viewer>
   </div>
   <div class="controls">
-
     <div id="js-tray" class="tray">
-
       <div id="js-tray-slide" class="tray__slide">
-
       </div>
-
     </div>
-
-
   </div>
-
 
 </body>
 

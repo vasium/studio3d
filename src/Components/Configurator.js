@@ -2,22 +2,16 @@ import React from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import '@google/model-viewer/dist/model-viewer';
 
 function Configurator() {
   // === THREE.JS CODE START ===
   const spinningLoader = document.getElementById('js-loader');
   const tray = document.getElementById('js-tray-slide');
-  const dragNotice = document.getElementById('js-drag-notice');
   const modelPath = 'chair.gltf';
-  const backgroundColor = 0xf1f1f1;
-  const canvas = document.getElementById('canvas');
-  // const canvas = document.querySelector('#c');
 
   var theModel;
   var activeOption = 'Metal';
-  var loaded = false;
 
   const colors = [
     {
@@ -76,43 +70,46 @@ function Configurator() {
     },
   ];
 
-  // Init the scene
-  const scene = new THREE.Scene();
-
-  // Set background
-  scene.background = new THREE.Color(backgroundColor);
-  scene.fog = new THREE.Fog(backgroundColor, 20, 100);
-
-  // Init the renderer
-  // const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-
-  // renderer.shadowMap.enabled = true;
-  // renderer.setPixelRatio(window.devicePixelRatio);
-
-  var cameraFar = 5;
-
-  // document.body.appendChild(renderer.domElement);
-
-  // Add a camerra
-  var camera = new THREE.PerspectiveCamera(
-    50,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-  );
-  camera.position.z = cameraFar;
-  camera.position.x = 0;
+  let txt1 = new THREE.TextureLoader().load('img/fabric_.jpg');
+  txt1.repeat.set([6], [6], [6]);
+  txt1.wrapS = THREE.RepeatWrapping;
+  txt1.wrapT = THREE.RepeatWrapping;
 
   // Initial material
-  const initialMaterial = new THREE.MeshPhongMaterial({
-    color: 0xf1f1f1,
-    shininess: 10,
+  const initialMaterial1 = new THREE.MeshPhongMaterial({
+    // color: 0x000000,
+    map: txt1,
+    shininess: 0,
+  });
+
+  let txt2 = new THREE.TextureLoader().load('img/pattern_.jpg');
+  txt2.repeat.set([6], [6], [6]);
+  txt2.wrapS = THREE.RepeatWrapping;
+  txt2.wrapT = THREE.RepeatWrapping;
+
+  // Initial material
+  const initialMaterial2 = new THREE.MeshPhongMaterial({
+    // color: 0x000000,
+    map: txt2,
+    shininess: 0,
+  });
+
+  let txt3 = new THREE.TextureLoader().load('img/wood_.jpg');
+  txt3.repeat.set([6], [6], [6]);
+  txt3.wrapS = THREE.RepeatWrapping;
+  txt3.wrapT = THREE.RepeatWrapping;
+
+  // Initial material
+  const initialMaterial3 = new THREE.MeshPhongMaterial({
+    // color: 0x000000,
+    map: txt3,
+    shininess: 0,
   });
 
   const initialMap = [
-    { childID: 'Metal', mtl: initialMaterial },
-    { childID: 'Pillow', mtl: initialMaterial },
-    { childID: 'Wood', mtl: initialMaterial },
+    { childID: 'Metal', mtl: initialMaterial1 },
+    { childID: 'Pillow', mtl: initialMaterial2 },
+    { childID: 'Wood', mtl: initialMaterial3 },
   ];
 
   // Init the object loader
@@ -131,7 +128,6 @@ function Configurator() {
       });
 
       // Set the models initial scale
-      theModel.scale.set(3, 3, 3);
       theModel.rotation.y = Math.PI;
 
       // Offset the y position a bit
@@ -141,9 +137,6 @@ function Configurator() {
       for (let object of initialMap) {
         initColor(theModel, object.childID, object.mtl);
       }
-
-      // Add the model to the scene
-      scene.add(theModel);
 
       // Remove the loader
       spinningLoader.remove();
@@ -167,78 +160,6 @@ function Configurator() {
       }
     });
   }
-
-  // Add lights
-  var hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.61);
-  hemiLight.position.set(0, 50, 0);
-
-  // Add hemisphere light to scene
-  scene.add(hemiLight);
-  var dirLight = new THREE.DirectionalLight(0xffffff, 0.54);
-  dirLight.position.set(-8, 12, 8);
-  dirLight.castShadow = true;
-  dirLight.shadow.mapSize = new THREE.Vector2(4096, 4096);
-
-  // Add directional Light to scene
-  scene.add(dirLight);
-
-  // // Floor
-  // var floorGeometry = new THREE.PlaneGeometry(5000, 5000, 1, 1);
-  // var floorMaterial = new THREE.MeshPhongMaterial({
-  //   color: 0xeeeeee,
-  //   shininess: 0,
-  // });
-
-  // var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-  // floor.rotation.x = -0.5 * Math.PI;
-  // floor.receiveShadow = true;
-  // floor.position.y = -1;
-  // scene.add(floor);
-
-  // Add controls
-  // var controls = new OrbitControls(camera, renderer.domElement);
-  // controls.maxPolarAngle = Math.PI / 2;
-  // controls.minPolarAngle = Math.PI / 3;
-  // controls.enableDamping = true;
-  // controls.enablePan = false;
-  // controls.dampingFactor = 0.1;
-  // controls.autoRotate = false; // Toggle this if you'd like the chair to automatically rotate
-  // controls.autoRotateSpeed = 0.2; // 30
-
-  function animate() {
-    // controls.update();
-    // renderer.render(scene, camera);
-    requestAnimationFrame(animate);
-
-    // if (resizeRendererToDisplaySize(renderer)) {
-    //   const canvas = renderer.domElement;
-    //   camera.aspect = canvas.clientWidth / canvas.clientHeight;
-    //   camera.updateProjectionMatrix();
-    // }
-
-    // if (theModel != null && loaded == false) {
-    //   initialRotation();
-    //   dragNotice.classList.add('start');
-    // }
-  }
-
-  animate();
-
-  // // Function - New resizing method
-  // function resizeRendererToDisplaySize(renderer) {
-  //   const canvas = renderer.domElement;
-  //   var width = window.innerWidth;
-  //   var height = window.innerHeight;
-  //   var canvasPixelWidth = canvas.width / window.devicePixelRatio;
-  //   var canvasPixelHeight = canvas.height / window.devicePixelRatio;
-
-  //   const needResize =
-  //     canvasPixelWidth !== width || canvasPixelHeight !== height;
-  //   if (needResize) {
-  //     renderer.setSize(width, height, false);
-  //   }
-  //   return needResize;
-  // }
 
   // Function - Build Colors
 
@@ -272,11 +193,6 @@ function Configurator() {
     // console.log(e);
     let option = e.target;
     activeOption = e.target.dataset.option;
-    // if (activeOption == 'Export') {
-    //   exportGLTF();
-    // } else if (activeOption == 'Test') {
-    //   exportGLTF1();
-    // } else {
     for (const otherOption of options) {
       otherOption.classList.remove('--is-active');
     }
@@ -291,7 +207,7 @@ function Configurator() {
     swatch.addEventListener('click', selectSwatch);
   }
 
-  async function selectSwatch(e) {
+  function selectSwatch(e) {
     let color = colors[parseInt(e.target.dataset.key)];
     let new_mtl;
 
@@ -300,7 +216,6 @@ function Configurator() {
       txt.repeat.set(color.size[0], color.size[1], color.size[2]);
       txt.wrapS = THREE.RepeatWrapping;
       txt.wrapT = THREE.RepeatWrapping;
-
       new_mtl = new THREE.MeshPhongMaterial({
         map: txt,
         shininess: color.shininess ? color.shininess : 10,
@@ -324,19 +239,6 @@ function Configurator() {
         }
       }
     });
-    // exportGLTF();
-  }
-
-  // Function - Opening rotate
-  let initRotate = 0;
-
-  function initialRotation() {
-    initRotate++;
-    if (initRotate <= 120) {
-      theModel.rotation.y += Math.PI / 60;
-    } else {
-      loaded = true;
-    }
   }
 
   // Slider
@@ -409,21 +311,8 @@ function Configurator() {
 
   slide(slider, sliderItems);
 
-  // document.getElementById('ar').addEventListener('click', function () {
-  //   exportGLTF();
-  // });
-
-  // document.getElementById('test').addEventListener('click', function () {
-  //   exportGLTF1();
-  // });
-
-  // var link1 = document.createElement('a');
-  var link = document.createElement('a');
-  link.style.display = 'none';
-
-  var gltfExporter = new GLTFExporter();
-
   function exportGLTF() {
+    var gltfExporter = new GLTFExporter();
     gltfExporter.parse(
       theModel,
       function (result) {
@@ -435,53 +324,6 @@ function Configurator() {
       options
     );
   }
-
-  // function saveString(text, filename) {
-  //   save(new Blob([text], { type: 'application/json' }), filename);
-  // }
-
-  // function save(blob) {
-  //   var myBlob = URL.createObjectURL(blob);
-
-  //   document.getElementById('model-display').src = myBlob;
-  //   // link.href =
-  //   //   'intent://arvr.google.com/scene-viewer/1.1?file=' +
-  //   //   URL.createObjectURL(blob) +
-  //   //   '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
-  //   // link.click();
-  // }
-
-  // function dexportGLTF() {
-  //   setTimeout(doSomething, 1000);
-  //   function doSomething() {
-  //     exportGLTF();
-  //   }
-  // }
-  // dexportGLTF();
-
-  // function exportGLTF1() {
-  //   var gltfExporter = new GLTFExporter();
-
-  //   gltfExporter.parse(
-  //     scene,
-  //     function (result) {
-  //       console.log('Hej');
-  //       var output = JSON.stringify(result, null, 2);
-  //       saveString1(output, 'scene.gltf');
-  //     },
-  //     options
-  //   );
-  // }
-  // function saveString1(text, filename) {
-  //   save1(new Blob([text], { type: 'application/json' }), filename);
-  // }
-
-  // function save1(blob) {
-  //   var myBlob = URL.createObjectURL(blob);
-
-  //   document.getElementById('model-display').src = myBlob;
-  //   link1.click();
-  // }
 
   // === THREE.JS EXAMPLE CODE END ===
 
