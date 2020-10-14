@@ -63,37 +63,56 @@
 </head>
 
 <body>
+
   <noscript>You need to enable JavaScript to run this app.</noscript>
 
   <div class="root" id="root"></div>
 
+  <div class="loading" id="js-loader">
+    <div class="loader"></div>
+  </div>
+
   <div class="mv">
-    <div class="loading" id="js-loader">
-      <div class="loader"></div>
-    </div>
-    <model-viewer class="mvin" id="model-display" src="" ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto"
-      camera-controls alt="A 3D model" auto-rotate>
-      <div class="options">
-        <div class="option --is-active" data-option="Metal">
-          Metal
+
+    <div class="item1">
+
+      <div class="container" style="display: flex; height: 100%;">
+
+        <div style="width: 100px">
+          <div class="options">
+            <div class="option --is-active" data-option="Metal">
+              Metal
+            </div>
+            <div class="option" data-option="Pillow">
+              Pillow
+            </div>
+            <div class="option" data-option="Wood">
+              Wood
+            </div>
+            <!-- <div class="option" id="ar" data-option="Export">
+            AR
+          </div> -->
+          </div>
         </div>
-        <div class="option" data-option="Pillow">
-          Pillow
+
+        <div style="flex-grow: 1;">
+          <model-viewer class="mvin" id="model-display" src="" ar ar-modes="webxr scene-viewer quick-look"
+            ar-scale="auto" camera-controls alt="A 3D model" auto-rotate></model-viewer>
         </div>
-        <div class="option" data-option="Wood">
-          Wood
-        </div>
-        <!-- <div class="option" id="ar" data-option="Export">
-          AR
-        </div> -->
+
       </div>
-    </model-viewer>
-    <div class="controls">
-      <div id="js-tray" class="tray">
-        <div id="js-tray-slide" class="tray__slide">
+
+    </div>
+
+    <div class="item2">
+      <div class="controls">
+        <div id="js-tray" class="tray">
+          <div id="js-tray-slide" class="tray__slide">
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 
 
