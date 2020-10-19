@@ -11,110 +11,278 @@
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   <title>React App</title>
   <link href="https://fonts.googleapis.com/css?family=Raleway:500,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="style.css" />
-  <style>
-    .loading {
-      position: fixed;
-      z-index: 50;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background: #f1f1f1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  <!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
+  <link href="./css/vectary.dcc22c.537f5a.css" rel="stylesheet" type="text/css">
 
-    .loader {
-      -webkit-perspective: 120px;
-      -moz-perspective: 120px;
-      -ms-perspective: 120px;
-      perspective: 120px;
-      width: 100px;
-      height: 100px;
-    }
-
-    .loader::before {
-      content: "";
-      position: absolute;
-      left: 25px;
-      top: 25px;
-      width: 50px;
-      height: 50px;
-      background-color: #ff0000;
-      animation: flip 1s infinite;
-    }
-
-    @keyframes flip {
-      0% {
-        transform: rotate(0);
-      }
-
-      50% {
-        transform: rotateY(180deg);
-      }
-
-      100% {
-        transform: rotateY(180deg) rotateX(180deg);
-      }
-    }
-  </style>
 </head>
 
 <body>
-
+  <div id="root"></div>
   <noscript>You need to enable JavaScript to run this app.</noscript>
 
-  <div class="root" id="root"></div>
+  <div id="root"></div>
 
-  <div class="loading" id="js-loader">
-    <div class="loader"></div>
-  </div>
+  <!-- Hello -->
+  <div js="mouse-move-bounds" class="h-section h-section_arapi">
+    <div class="h-container">
+      <div class="h-section_text pointerevents h-section_text-row">
+        <h2 class="h-section_title h-section_title-center h-section_title-margin0">Studio3D model configurator.
+        </h2>
+        <p class="h-section_p h-section_p-center h-section_p-margin0">With the Studio3D model configurator you can
+          dynamically change the materials, the textures, the meshes and the properties of the model.</p>
+      </div>
+      <div class="h-arapiviewer">
+        <div class="h-ar-form">
+          <div class="h-customizer-subtitle">Color</div>
+          <div class="customizer-group">
+            <div class="customizer-item hue active w-embed">
+              <div id="hue-color"><span></span></div>
+              <input id="hue" type="range" min="0" max="350" value="340" step="1">
+              <input type="text" id="hue-hex">
+              <style>
+                :root {
+                  --hue-range-color: rgb(99, 54, 79);
+                  ;
+                }
 
-  <div class="mv">
+                #hue-color {
+                  position: absolute;
+                  left: 85%;
+                  display: block;
+                  background: #A36B80;
+                  background: var(--hue-range-color);
+                  width: 22px;
+                  height: 40px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  border-radius: 12px;
+                  cursor: pointer;
+                  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+                  pointer-events: none;
+                }
 
-    <div class="item1">
+                #hue-color span {
+                  display: block;
+                  width: 2px;
+                  height: 12px;
+                  border-radius: 2px;
+                  background-color: rgba(255, 255, 255, 0.4);
+                }
 
-      <div class="container" style="display: flex; height: 100%;">
+                #hue {
+                  width: 100%;
+                  height: 30px;
+                  border-radius: 2px;
+                  -webkit-appearance: none;
+                  -moz-appearance: none;
+                  appearance: none;
+                  border: none;
+                  outline: none;
+                  margin: 0;
+                  outline: 0;
+                  background: transparent;
+                  cursor: pointer;
+                }
 
-        <div style="width: 100px">
-          <div class="options">
-            <div class="option --is-active" data-option="Metal">
-              Metal
+                #hue::-webkit-slider-thumb {
+                  opacity: 0;
+                }
+
+                #hue::-moz-range-thumb {
+                  opacity: 0;
+                }
+
+                #hue::-ms-thumb {
+                  opacity: 0;
+                }
+
+                #hue::-webkit-slider-runnable-track {
+                  -webkit-appearance: none;
+                  -moz-appearance: none;
+                  appearance: none;
+                  border-radius: 2px;
+                  background: -moz-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
+                  /* FF3.6+ */
+                  background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 0, 0, 0.3)), color-stop(16.66666666666667%, rgba(255, 255, 0, 0.3)), color-stop(33.33%, rgba(0, 255, 0, 0.3)), color-stop(50%, rgba(0, 255, 254, 0.3)), color-stop(66.66666666666667%, rgba(0, 0, 255, 0.3)), color-stop(83.33333333333333%, rgba(254, 0, 255, 0.3)), color-stop(100%, rgba(255, 0, 0, 0.3))), rgba(155, 155, 155, 0.7);
+                  /* Chrome,Safari4+ */
+                  background: -webkit-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
+                  /* Chrome10+,Safari5.1+ */
+                  background: -o-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
+                  /* Opera 11.10+ */
+                  background: -ms-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
+                  /* IE10+ */
+                  background: linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
+                  /* W3C */
+                  height: 3px;
+                }
+
+                #hue::-moz-range-track {
+                  -webkit-appearance: none;
+                  -moz-appearance: none;
+                  appearance: none;
+                  border-radius: 2px;
+                  background: -moz-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
+                  /* FF3.6+ */
+                  background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 0, 0, 0.3)), color-stop(16.66666666666667%, rgba(255, 255, 0, 0.3)), color-stop(33.33%, rgba(0, 255, 0, 0.3)), color-stop(50%, rgba(0, 255, 254, 0.3)), color-stop(66.66666666666667%, rgba(0, 0, 255, 0.3)), color-stop(83.33333333333333%, rgba(254, 0, 255, 0.3)), color-stop(100%, rgba(255, 0, 0, 0.3))), rgba(155, 155, 155, 0.7);
+                  /* Chrome,Safari4+ */
+                  background: -webkit-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
+                  /* Chrome10+,Safari5.1+ */
+                  background: -o-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
+                  /* Opera 11.10+ */
+                  background: -ms-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
+                  /* IE10+ */
+                  background: linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
+                  /* W3C */
+                  height: 3px;
+                }
+
+                #hue::-ms-track {
+                  -webkit-appearance: none;
+                  -moz-appearance: none;
+                  appearance: none;
+                  border-radius: 2px;
+                  background: -moz-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
+                  /* FF3.6+ */
+                  background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 0, 0, 0.3)), color-stop(16.66666666666667%, rgba(255, 255, 0, 0.3)), color-stop(33.33%, rgba(0, 255, 0, 0.3)), color-stop(50%, rgba(0, 255, 254, 0.3)), color-stop(66.66666666666667%, rgba(0, 0, 255, 0.3)), color-stop(83.33333333333333%, rgba(254, 0, 255, 0.3)), color-stop(100%, rgba(255, 0, 0, 0.3))), rgba(155, 155, 155, 0.7);
+                  /* Chrome,Safari4+ */
+                  background: -webkit-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
+                  /* Chrome10+,Safari5.1+ */
+                  background: -o-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
+                  /* Opera 11.10+ */
+                  background: -ms-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
+                  /* IE10+ */
+                  background: linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
+                  /* W3C */
+                  height: 3px;
+                }
+
+                #hue-hex {
+                  display: none;
+                }
+
+                #color {
+                  width: 20px;
+                  height: 20px;
+                  margin-right: 10px;
+                }
+              </style>
             </div>
-            <div class="option" data-option="Pillow">
-              Pillow
+          </div>
+          <div class="h-customizer-subtitle">Base</div>
+          <div class="customizer-group">
+            <div id="glossy" class="customizer-item active" data-option="Metal1">
+              <div class="customizer-item-icon glossy" data-option="Metal1"></div>
+              <div data-option="Metal1">Metal1</div>
             </div>
-            <div class="option" data-option="Wood">
-              Wood
+            <div id="matte" class="customizer-item" data-option="Metal2">
+              <div class="customizer-item-icon matte" data-option="Metal2"></div>
+              <div data-option="Metal2">Metal2</div>
             </div>
-            <!-- <div class="option" id="ar" data-option="Export">
-            AR
-          </div> -->
+            <div id="matte" class="customizer-item" data-option="Metal3">
+              <div class="customizer-item-icon rock" data-option="Metal3"></div>
+              <div data-option="Metal3">Metal3</div>
+            </div>
+          </div>
+          <div class="h-customizer-subtitle">Pillow</div>
+          <div class="customizer-group">
+            <div id="color2" class="customizer-item active">
+              <div class="customizer-item-icon light"></div>
+              <div>Light</div>
+            </div>
+            <div id="color1" class="customizer-item">
+              <div class="customizer-item-icon rock"></div>
+              <div>Rock</div>
+            </div>
+            <div id="color3" class="customizer-item">
+              <div class="customizer-item-icon dark"></div>
+              <div>Dark</div>
+            </div>
+          </div>
+
+          <div class="h-customizer-subtitle">Wood</div>
+          <div class="customizer-group">
+            <div id="color2" class="customizer-item active">
+              <div class="customizer-item-icon light"></div>
+              <div>Light</div>
+            </div>
+            <div id="color1" class="customizer-item">
+              <div class="customizer-item-icon rock"></div>
+              <div>Rock</div>
+            </div>
+            <div id="color3" class="customizer-item">
+              <div class="customizer-item-icon dark"></div>
+              <div>Dark</div>
+            </div>
+          </div>
+
+          <div class="h-customizer-subtitle">Legs</div>
+          <div class="customizer-group">
+            <div id="legType2" class="customizer-item active center">
+              <div>Fiberglass Leg</div>
+            </div>
+            <div id="legType1" class="customizer-item center">
+              <div>Rod Frame</div>
+            </div>
           </div>
         </div>
+        <div class="h-viewer_containerapi">
+          <div class="h-viewerarembed w-embed w-script">
+            <style>
+              .h-section.h-section_arapi {
+                background: var(--hue-range-color);
+                --progress-bar-color: transparent;
+                --poster-color: transparent;
+                --progress-mask: transparent;
+              }
+            </style>
 
-        <div style="flex-grow: 1;">
-          <model-viewer class="mvin" id="model-display" src="" ar ar-modes="scene-viewer webxr" ar-scale="auto" camera-controls alt="A 3D model"></model-viewer>
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="item2">
-      <div class="controls">
-        <div id="js-tray" class="tray">
-          <div id="js-tray-slide" class="tray__slide">
+            <model-viewer data-js-focus-visible="" camera-orbit="225deg 55deg 1m" style="width: 100%; height: 100%;"
+              id="viewer3" src="" ar ar-modes="webxr scene-viewer" ar-scale="auto" camera-controls alt="A 3D model">
+            </model-viewer>
+            <script></script>
           </div>
+          <div class="h-viewer_handler h-viewer_handler-top"></div>
+          <div class="h-viewer_handler h-viewer_handler-bottom"></div>
+          <div class="h-viewer_handler h-viewer_handler-left"></div>
+          <div class="h-viewer_handler"></div>
+        </div>
+      </div>
+      <div class="h-columns pointerevents">
+        <div class="h-column">
+          <div class="h-column_title">Object &amp; Material Changes</div>
+          <div class="h-column_p h-column_p-white">Dynamically change scene lights, materials and all object
+            properties like visibility, rotation, position and scale.</div>
+        </div>
+        <div class="h-column">
+          <div class="h-column_title">Animations</div>
+          <div class="h-column_p h-column_p-white">Switch from pre-selected views, define orbits, animate
+            objects or build exploding views into your composition.</div>
+        </div>
+        <div class="h-column">
+          <div class="h-column_title">Meta Operations</div>
+          <div class="h-column_p h-column_p-white">Your entire scene is API accessible, allowing you to build
+            solutions like annotations attached to objects or even image export.</div>
         </div>
       </div>
     </div>
-
   </div>
+  <!-- Hello end -->
+  <div class="w-embed">
+    <style>
+      html {
+        font-size: 62.5%;
+        outline: 0 !important;
+      }
 
-
+      @media (max-width: 1230px) {
+        html {
+          font-size: 52%;
+          outline: 0 !important;
+        }
+      }
+    </style>
+  </div>
 
 </body>
 
