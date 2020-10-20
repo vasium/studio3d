@@ -2,303 +2,90 @@ import React from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import '@google/model-viewer/dist/model-viewer';
+import { Color } from 'three';
+// import 'react-app-polyfill/stable';
 
 function Configurator() {
   // === THREE.JS CODE START ===
-  const LOADER = document.getElementById('js-loader');
-  const TRAY = document.getElementById('js-tray-slide');
-  const DRAG_NOTICE = document.getElementById('js-drag-notice');
-  const MODEL_PATH = 'box.gltf';
-  const BACKGROUND_COLOR = 0xf1f1f1;
-  const canvas = document.querySelector('#c');
-  const gltfModel = 'chair.gltf';
+  // const spinningLoader = document.getElementById('js-loader');
+  // const tray = document.getElementById('js-tray-slide');
+  const modelPath = 'test.gltf';
 
   var theModel;
-  var activeOption = 'Metal';
-  var loaded = false;
+  var activeOption;
 
   const colors = [
     {
-      texture: 'img/wood_.jpg',
-      size: [2, 2, 2],
+      texture: 'img/0025.jpg',
+      size: [12, 12, 12],
       shininess: 60,
     },
     {
-      texture: 'img/leather_Base_color.jpg',
-      size: [1, 1, 1],
+      texture: 'img/0504.jpg',
+      size: [12, 12, 12],
       shininess: 60,
     },
-
     {
-      texture: 'img/fabric_.jpg',
-      size: [4, 4, 4],
-      shininess: 0,
-    },
-
-    {
-      texture: 'img/pattern_.jpg',
-      size: [8, 8, 8],
-      shininess: 10,
-    },
-
-    {
-      texture: 'img/denim_.jpg',
-      size: [3, 3, 3],
-      shininess: 0,
-    },
-
-    {
-      texture: 'img/quilt_.jpg',
+      texture: 'img/metal01.jpg',
       size: [6, 6, 6],
-      shininess: 0,
+      shininess: 60,
     },
-
-    {
-      color: '131417',
-    },
-
-    {
-      color: '374047',
-    },
-
-    {
-      color: '5f6e78',
-    },
-
-    {
-      color: '7f8a93',
-    },
-
-    {
-      color: '97a1a7',
-    },
-
-    {
-      color: 'acb4b9',
-    },
-
-    {
-      color: 'DF9998',
-    },
-
-    {
-      color: '7C6862',
-    },
-
-    {
-      color: 'A3AB84',
-    },
-
-    {
-      color: 'D6CCB1',
-    },
-
-    {
-      color: 'F8D5C4',
-    },
-
-    {
-      color: 'A3AE99',
-    },
-
-    {
-      color: 'EFF2F2',
-    },
-
-    {
-      color: 'B0C5C1',
-    },
-
-    {
-      color: '8B8C8C',
-    },
-
-    {
-      color: '565F59',
-    },
-
-    {
-      color: 'CB304A',
-    },
-
-    {
-      color: 'FED7C8',
-    },
-
-    {
-      color: 'C7BDBD',
-    },
-
-    {
-      color: '3DCBBE',
-    },
-
-    {
-      color: '264B4F',
-    },
-
-    {
-      color: '389389',
-    },
-
-    {
-      color: '85BEAE',
-    },
-
-    {
-      color: 'F2DABA',
-    },
-
-    {
-      color: 'F2A97F',
-    },
-
-    {
-      color: 'D85F52',
-    },
-
-    {
-      color: 'D92E37',
-    },
-
-    {
-      color: 'FC9736',
-    },
-
-    {
-      color: 'F7BD69',
-    },
-
-    {
-      color: 'A4D09C',
-    },
-
-    {
-      color: '4C8A67',
-    },
-
-    {
-      color: '25608A',
-    },
-
-    {
-      color: '75C8C6',
-    },
-
-    {
-      color: 'F5E4B7',
-    },
-
-    {
-      color: 'E69041',
-    },
-
-    {
-      color: 'E56013',
-    },
-
-    {
-      color: '11101D',
-    },
-
-    {
-      color: '630609',
-    },
-
-    {
-      color: 'C9240E',
-    },
-
-    {
-      color: 'EC4B17',
-    },
-
-    {
-      color: '281A1C',
-    },
-
-    {
-      color: '4F556F',
-    },
-
-    {
-      color: '64739B',
-    },
-
-    {
-      color: 'CDBAC7',
-    },
-
-    {
-      color: '946F43',
-    },
-
-    {
-      color: '66533C',
-    },
-
-    {
-      color: '173A2F',
-    },
-
-    {
-      color: '153944',
-    },
-
-    {
-      color: '27548D',
-    },
-
-    {
-      color: '438AAC',
-    },
+    // {
+    //   color: '438AAC',
+    // },
+    // {
+    //   color: '000000',
+    // },
   ];
 
-  // Init the scene
-  const scene = new THREE.Scene();
-
-  // Set background
-  scene.background = new THREE.Color(BACKGROUND_COLOR);
-  scene.fog = new THREE.Fog(BACKGROUND_COLOR, 20, 100);
-
-  // Init the renderer
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-
-  renderer.shadowMap.enabled = true;
-  renderer.setPixelRatio(window.devicePixelRatio);
-
-  var cameraFar = 5;
-
-  document.body.appendChild(renderer.domElement);
-
-  // Add a camerra
-  var camera = new THREE.PerspectiveCamera(
-    50,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    1000
-  );
-  camera.position.z = cameraFar;
-  camera.position.x = 0;
+  let txt1 = new THREE.TextureLoader().load('img/0025.jpg');
+  txt1.repeat.set([6], [6], [6]);
+  txt1.wrapS = THREE.RepeatWrapping;
+  txt1.wrapT = THREE.RepeatWrapping;
 
   // Initial material
-  const INITIAL_MTL = new THREE.MeshPhongMaterial({
-    color: 0xf1f1f1,
-    shininess: 10,
+  const initialMaterial1 = new THREE.MeshPhongMaterial({
+    // color: 0x000000,
+    map: txt1,
+    shininess: 0,
   });
 
-  const INITIAL_MAP = [
-    { childID: 'Metal', mtl: INITIAL_MTL },
-    { childID: 'Pillow', mtl: INITIAL_MTL },
-    { childID: 'Wood', mtl: INITIAL_MTL },
+  let txt2 = new THREE.TextureLoader().load('img/pattern_.jpg');
+  txt2.repeat.set([12], [12], [12]);
+  txt2.wrapS = THREE.RepeatWrapping;
+  txt2.wrapT = THREE.RepeatWrapping;
+
+  // Initial material
+  const initialMaterial2 = new THREE.MeshPhongMaterial({
+    // color: 0x000000,
+    map: txt2,
+    shininess: 0,
+  });
+
+  let txt3 = new THREE.TextureLoader().load('img/wood_.jpg');
+  txt3.repeat.set([6], [6], [6]);
+  txt3.wrapS = THREE.RepeatWrapping;
+  txt3.wrapT = THREE.RepeatWrapping;
+
+  // Initial material
+  const initialMaterial3 = new THREE.MeshPhongMaterial({
+    // color: 0x000000,
+    map: txt3,
+    shininess: 0,
+  });
+
+  const initialMap = [
+    { childID: 'Metal', mtl: initialMaterial1 },
+    { childID: 'Pillow', mtl: initialMaterial2 },
+    { childID: 'Wood', mtl: initialMaterial3 },
   ];
 
   // Init the object loader
   var loader = new GLTFLoader();
 
   loader.load(
-    MODEL_PATH,
+    modelPath,
     function (gltf) {
       theModel = gltf.scene;
 
@@ -310,22 +97,20 @@ function Configurator() {
       });
 
       // Set the models initial scale
-      theModel.scale.set(3, 3, 3);
       theModel.rotation.y = Math.PI;
 
       // Offset the y position a bit
-      theModel.position.y = -1;
+      theModel.position.y = 0;
 
       // Set initial textures
-      for (let object of INITIAL_MAP) {
+      for (let object of initialMap) {
         initColor(theModel, object.childID, object.mtl);
       }
 
-      // Add the model to the scene
-      scene.add(theModel);
-
       // Remove the loader
-      LOADER.remove();
+      // spinningLoader.remove();
+
+      exportGLTF();
     },
     undefined,
     function (error) {
@@ -345,116 +130,59 @@ function Configurator() {
     });
   }
 
-  // Add lights
-  var hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.61);
-  hemiLight.position.set(0, 50, 0);
-  // Add hemisphere light to scene
-  scene.add(hemiLight);
+  // // Function - Build Colors
 
-  var dirLight = new THREE.DirectionalLight(0xffffff, 0.54);
-  dirLight.position.set(-8, 12, 8);
-  dirLight.castShadow = true;
-  dirLight.shadow.mapSize = new THREE.Vector2(4096, 4096);
-  // Add directional Light to scene
-  scene.add(dirLight);
+  // function buildColors(colors) {
+  //   for (let [i, color] of colors.entries()) {
+  //     let swatch = document.createElement('div');
+  //     swatch.classList.add('tray__swatch');
 
-  // // Floor
-  // var floorGeometry = new THREE.PlaneGeometry(5000, 5000, 1, 1);
-  // var floorMaterial = new THREE.MeshPhongMaterial({
-  //   color: 0xeeeeee,
-  //   shininess: 0,
-  // });
+  //     if (color.texture) {
+  //       swatch.style.backgroundImage = 'url(' + color.texture + ')';
+  //     } else {
+  //       swatch.style.background = '#' + color.color;
+  //     }
 
-  // var floor = new THREE.Mesh(floorGeometry, floorMaterial);
-  // floor.rotation.x = -0.5 * Math.PI;
-  // floor.receiveShadow = true;
-  // floor.position.y = -1;
-  // scene.add(floor);
+  //     swatch.setAttribute('data-key', i);
+  //     tray.append(swatch);
+  //   }
+  // }
 
-  // Add controls
-  var controls = new OrbitControls(camera, renderer.domElement);
-  controls.maxPolarAngle = Math.PI / 2;
-  controls.minPolarAngle = Math.PI / 3;
-  controls.enableDamping = true;
-  controls.enablePan = false;
-  controls.dampingFactor = 0.1;
-  controls.autoRotate = false; // Toggle this if you'd like the chair to automatically rotate
-  controls.autoRotateSpeed = 0.2; // 30
-
-  function animate() {
-    controls.update();
-    renderer.render(scene, camera);
-    requestAnimationFrame(animate);
-
-    if (resizeRendererToDisplaySize(renderer)) {
-      const canvas = renderer.domElement;
-      camera.aspect = canvas.clientWidth / canvas.clientHeight;
-      camera.updateProjectionMatrix();
-    }
-
-    if (theModel != null && loaded == false) {
-      initialRotation();
-      DRAG_NOTICE.classList.add('start');
-    }
-  }
-
-  animate();
-
-  // Function - New resizing method
-  function resizeRendererToDisplaySize(renderer) {
-    const canvas = renderer.domElement;
-    var width = window.innerWidth;
-    var height = window.innerHeight;
-    var canvasPixelWidth = canvas.width / window.devicePixelRatio;
-    var canvasPixelHeight = canvas.height / window.devicePixelRatio;
-
-    const needResize =
-      canvasPixelWidth !== width || canvasPixelHeight !== height;
-    if (needResize) {
-      renderer.setSize(width, height, false);
-    }
-    return needResize;
-  }
-
-  // Function - Build Colors
-
-  function buildColors(colors) {
-    for (let [i, color] of colors.entries()) {
-      let swatch = document.createElement('div');
-      swatch.classList.add('tray__swatch');
-
-      if (color.texture) {
-        swatch.style.backgroundImage = 'url(' + color.texture + ')';
-      } else {
-        swatch.style.background = '#' + color.color;
-      }
-
-      swatch.setAttribute('data-key', i);
-      TRAY.append(swatch);
-    }
-  }
-
-  buildColors(colors);
+  // buildColors(colors);
 
   // Select Option
-  const options = document.querySelectorAll('.option');
+  const options = document.querySelectorAll('.customizer-item');
+  console.log(options);
 
   for (const option of options) {
+    console.log(option);
+
     option.addEventListener('click', selectOption);
+    // option.addEventListener('click', dexportGLTF);
   }
 
   function selectOption(e) {
     // console.log(e);
+
     let option = e.target;
     activeOption = e.target.dataset.option;
-    if (activeOption == 'Export') {
-      exportGLTF();
-    } else {
-      for (const otherOption of options) {
-        otherOption.classList.remove('--is-active');
-      }
-      option.classList.add('--is-active');
+    for (const otherOption of options) {
+      otherOption.classList.remove('--is-active');
     }
+    option.classList.add('--is-active');
+    if (activeOption == 'Metal1') {
+      activeOption = 'Metal';
+      selectSwatch(0);
+    }
+    if (activeOption == 'Metal2') {
+      activeOption = 'Metal';
+      selectSwatch(1);
+    }
+    if (activeOption == 'Metal3') {
+      activeOption = 'Metal';
+      selectSwatch(2);
+    }
+    // }
   }
 
   // Swatches
@@ -465,31 +193,46 @@ function Configurator() {
   }
 
   function selectSwatch(e) {
-    let color = colors[parseInt(e.target.dataset.key)];
+    let color = colors[e];
     let new_mtl;
 
+    console.log('activeOption22222' + activeOption);
     if (color.texture) {
-      let txt = new THREE.TextureLoader().load(color.texture);
-
+      let txt = new THREE.TextureLoader().load(color.texture, exportGLTF);
       txt.repeat.set(color.size[0], color.size[1], color.size[2]);
       txt.wrapS = THREE.RepeatWrapping;
       txt.wrapT = THREE.RepeatWrapping;
-
       new_mtl = new THREE.MeshPhongMaterial({
         map: txt,
         shininess: color.shininess ? color.shininess : 10,
       });
+      console.log('Color: ' + color.color);
+
+      console.log(new_mtl);
+      console.log(theModel);
+      console.log(activeOption);
+      console.log('Active' + new_mtl);
+
+      setMaterial(theModel, activeOption, new_mtl);
     } else {
       new_mtl = new THREE.MeshPhongMaterial({
         color: parseInt('0x' + color.color),
         shininess: color.shininess ? color.shininess : 10,
       });
+      console.log('Color: ' + color.color);
+      console.log(new_mtl);
+      console.log(theModel);
+      console.log(activeOption);
+      console.log('Active' + new_mtl);
+      setMaterial(theModel, activeOption, new_mtl);
+      exportGLTF();
     }
-
-    setMaterial(theModel, activeOption, new_mtl);
   }
 
   function setMaterial(parent, type, mtl) {
+    console.log('parent' + parent);
+    console.log('type' + type);
+    console.log('mtl' + mtl);
     parent.traverse((o) => {
       if (o.isMesh && o.nameID != null) {
         if (o.nameID == type) {
@@ -499,141 +242,93 @@ function Configurator() {
     });
   }
 
-  // Function - Opening rotate
-  let initRotate = 0;
+  // // Slider
+  // var slider = document.getElementById('js-tray'),
+  //   sliderItems = document.getElementById('js-tray-slide'),
+  //   difference;
 
-  function initialRotation() {
-    initRotate++;
-    if (initRotate <= 120) {
-      theModel.rotation.y += Math.PI / 60;
-    } else {
-      loaded = true;
-    }
-  }
+  // function slide(wrapper, items) {
+  //   var posX1 = 0,
+  //     posX2 = 0,
+  //     posInitial,
+  //     threshold = 20,
+  //     posFinal,
+  //     slides = items.getElementsByClassName('tray__swatch');
 
-  // Slider
-  var slider = document.getElementById('js-tray'),
-    sliderItems = document.getElementById('js-tray-slide'),
-    difference;
+  //   // Mouse events
+  //   items.onmousedown = dragStart;
 
-  function slide(wrapper, items) {
-    var posX1 = 0,
-      posX2 = 0,
-      posInitial,
-      threshold = 20,
-      posFinal,
-      slides = items.getElementsByClassName('tray__swatch');
+  //   // Touch events
+  //   items.addEventListener('touchstart', dragStart);
+  //   items.addEventListener('touchend', dragEnd);
+  //   items.addEventListener('touchmove', dragAction);
 
-    // Mouse events
-    items.onmousedown = dragStart;
+  //   function dragStart(e) {
+  //     e = e || window.event;
+  //     posInitial = items.offsetLeft;
+  //     difference = sliderItems.offsetWidth - slider.offsetWidth;
+  //     difference = difference * -1;
 
-    // Touch events
-    items.addEventListener('touchstart', dragStart);
-    items.addEventListener('touchend', dragEnd);
-    items.addEventListener('touchmove', dragAction);
+  //     if (e.type == 'touchstart') {
+  //       posX1 = e.touches[0].clientX;
+  //     } else {
+  //       posX1 = e.clientX;
+  //       document.onmouseup = dragEnd;
+  //       document.onmousemove = dragAction;
+  //     }
+  //   }
 
-    function dragStart(e) {
-      e = e || window.event;
-      posInitial = items.offsetLeft;
-      difference = sliderItems.offsetWidth - slider.offsetWidth;
-      difference = difference * -1;
+  //   function dragAction(e) {
+  //     e = e || window.event;
 
-      if (e.type == 'touchstart') {
-        posX1 = e.touches[0].clientX;
-      } else {
-        posX1 = e.clientX;
-        document.onmouseup = dragEnd;
-        document.onmousemove = dragAction;
-      }
-    }
+  //     if (e.type == 'touchmove') {
+  //       posX2 = posX1 - e.touches[0].clientX;
+  //       posX1 = e.touches[0].clientX;
+  //     } else {
+  //       posX2 = posX1 - e.clientX;
+  //       posX1 = e.clientX;
+  //     }
 
-    function dragAction(e) {
-      e = e || window.event;
+  //     if (
+  //       items.offsetLeft - posX2 <= 0 &&
+  //       items.offsetLeft - posX2 >= difference
+  //     ) {
+  //       items.style.left = items.offsetLeft - posX2 + 'px';
+  //     }
+  //   }
 
-      if (e.type == 'touchmove') {
-        posX2 = posX1 - e.touches[0].clientX;
-        posX1 = e.touches[0].clientX;
-      } else {
-        posX2 = posX1 - e.clientX;
-        posX1 = e.clientX;
-      }
+  //   function dragEnd(e) {
+  //     posFinal = items.offsetLeft;
+  //     if (posFinal - posInitial < -threshold) {
+  //     } else if (posFinal - posInitial > threshold) {
+  //     } else {
+  //       items.style.left = posInitial + 'px';
+  //     }
 
-      if (
-        items.offsetLeft - posX2 <= 0 &&
-        items.offsetLeft - posX2 >= difference
-      ) {
-        items.style.left = items.offsetLeft - posX2 + 'px';
-      }
-    }
+  //     document.onmouseup = null;
+  //     document.onmousemove = null;
+  //   }
+  // }
 
-    function dragEnd(e) {
-      posFinal = items.offsetLeft;
-      if (posFinal - posInitial < -threshold) {
-      } else if (posFinal - posInitial > threshold) {
-      } else {
-        items.style.left = posInitial + 'px';
-      }
-
-      document.onmouseup = null;
-      document.onmousemove = null;
-    }
-  }
-
-  slide(slider, sliderItems);
-
-  // document
-  //   .getElementById('export_object')
-  //   .addEventListener('click', function () {
-  //     exportGLTF();
-  //   });
-
-  // const exportLink = document.getElementById('Export');
-  // const exportBlob = new Blob(['Hello', 'Download'], { type: 'text/plain' });
-  // // exportLink.href = URL.createObjectURL(exportBlob);
-  // console.log('Hi' + exportLink);
-  // console.log(exportBlob);
-
-  var link = document.createElement('a');
-  link.style.display = 'none';
+  // slide(slider, sliderItems);
 
   function exportGLTF() {
     var gltfExporter = new GLTFExporter();
-
     gltfExporter.parse(
-      scene,
+      theModel,
       function (result) {
-        console.log('Hej');
-        var output = JSON.stringify(result, null, 2);
-        saveString(output, 'scene.gltf');
+        let output = JSON.stringify(result, null, 2);
+        let blob = new Blob([output], { type: 'application/json' });
+        let myBlob = URL.createObjectURL(blob);
+        document.getElementById('viewer3').src = myBlob;
       },
       options
     );
   }
 
-  function saveString(text, filename) {
-    save(new Blob([text], { type: 'application/json' }), filename);
-  }
-
-  function save(blob) {
-    // var reader = new FileReader();
-    // reader.readAsDataURL(blob);
-    // reader.onloadend = function () {
-    //   var base64data = reader.result;
-    //   console.log(base64data);
-    // };
-    link.href =
-      'intent://arvr.google.com/scene-viewer/1.1?file=' +
-      URL.createObjectURL(blob) +
-      '&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end';
-    link.click();
-  }
-
   // === THREE.JS EXAMPLE CODE END ===
 
-  return <div>{/* <h1>Heloooooo</h1> */}</div>;
+  return <div></div>;
 }
 
 export default Configurator;
-
-// intent://arvr.google.com/scene-viewer/1.1?file=blob%3Ahttp%3A%2F%2Flocalhost%3A3000%2F06e8406a-c76e-4247-8277-2006104c93e0scene.gltf&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end
-// intent://arvr.google.com/scene-viewer/1.1?file=blob:http://localhost:3000/5d96356e-295a-49c6-87b9-e314a5a92653&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end
