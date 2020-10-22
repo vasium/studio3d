@@ -17,17 +17,47 @@ function Configurator() {
 
   const colors = [
     {
-      texture: 'img/0025.jpg',
-      size: [12, 12, 12],
-      shininess: 60,
-    },
-    {
-      texture: 'img/0504.jpg',
-      size: [12, 12, 12],
-      shininess: 60,
-    },
-    {
       texture: 'img/metal01.jpg',
+      size: [6, 6, 6],
+      shininess: 60,
+    },
+    {
+      texture: 'img/metal02.jpg',
+      size: [6, 6, 6],
+      shininess: 60,
+    },
+    {
+      texture: 'img/metal03.jpg',
+      size: [6, 6, 6],
+      shininess: 60,
+    },
+    {
+      texture: 'img/pillow01.jpg',
+      size: [6, 6, 6],
+      shininess: 60,
+    },
+    {
+      texture: 'img/pillow02.jpg',
+      size: [6, 6, 6],
+      shininess: 60,
+    },
+    {
+      texture: 'img/pillow03.jpg',
+      size: [6, 6, 6],
+      shininess: 60,
+    },
+    {
+      texture: 'img/wood01.jpg',
+      size: [6, 6, 6],
+      shininess: 60,
+    },
+    {
+      texture: 'img/wood02.jpg',
+      size: [6, 6, 6],
+      shininess: 60,
+    },
+    {
+      texture: 'img/wood03.jpg',
       size: [6, 6, 6],
       shininess: 60,
     },
@@ -39,7 +69,7 @@ function Configurator() {
     // },
   ];
 
-  let txt1 = new THREE.TextureLoader().load('img/0025.jpg');
+  let txt1 = new THREE.TextureLoader().load('img/metal01.jpg');
   txt1.repeat.set([6], [6], [6]);
   txt1.wrapS = THREE.RepeatWrapping;
   txt1.wrapT = THREE.RepeatWrapping;
@@ -51,8 +81,8 @@ function Configurator() {
     shininess: 0,
   });
 
-  let txt2 = new THREE.TextureLoader().load('img/pattern_.jpg');
-  txt2.repeat.set([12], [12], [12]);
+  let txt2 = new THREE.TextureLoader().load('img/pillow01.jpg');
+  txt2.repeat.set([6], [6], [6]);
   txt2.wrapS = THREE.RepeatWrapping;
   txt2.wrapT = THREE.RepeatWrapping;
 
@@ -63,7 +93,7 @@ function Configurator() {
     shininess: 0,
   });
 
-  let txt3 = new THREE.TextureLoader().load('img/wood_.jpg');
+  let txt3 = new THREE.TextureLoader().load('img/wood01.jpg');
   txt3.repeat.set([6], [6], [6]);
   txt3.wrapS = THREE.RepeatWrapping;
   txt3.wrapT = THREE.RepeatWrapping;
@@ -151,25 +181,36 @@ function Configurator() {
   // buildColors(colors);
 
   // Select Option
-  const options = document.querySelectorAll('.customizer-item');
-  console.log(options);
+  // const options = document.querySelectorAll(".customizer-group.customizer-item");
 
-  for (const option of options) {
-    console.log(option);
+  const allButtons = document.querySelectorAll(".customizer-group .customizer-item");
+  allButtons.forEach(b => b.addEventListener("click", e => {
+    e.currentTarget.parentNode.querySelectorAll(".customizer-group .customizer-item")
+      .forEach(button => button.classList.remove("active"));
+    e.currentTarget.classList.add("active");
+    activeOption = e.currentTarget.dataset.option;
+    selectOption();
+  }));
 
-    option.addEventListener('click', selectOption);
-    // option.addEventListener('click', dexportGLTF);
-  }
+  // for (const option of options) {
+
+  //   option.addEventListener('click', selectOption);
+  //   // option.addEventListener('click', dexportGLTF);
+  // }
 
   function selectOption(e) {
-    // console.log(e);
 
-    let option = e.target;
-    activeOption = e.target.dataset.option;
-    for (const otherOption of options) {
-      otherOption.classList.remove('--is-active');
-    }
-    option.classList.add('--is-active');
+
+    // let option = e.target;
+
+
+    // for (const otherOption of options) {
+    //   otherOption.classList.remove('active');
+
+    // }
+
+    // option.classList.add('active');
+
     if (activeOption == 'Metal1') {
       activeOption = 'Metal';
       selectSwatch(0);
@@ -182,6 +223,38 @@ function Configurator() {
       activeOption = 'Metal';
       selectSwatch(2);
     }
+
+    if (activeOption == 'Pillow1') {
+      activeOption = 'Pillow';
+      selectSwatch(3);
+    }
+
+    if (activeOption == 'Pillow2') {
+      activeOption = 'Pillow';
+      selectSwatch(4);
+    }
+
+    if (activeOption == 'Pillow3') {
+      activeOption = 'Pillow';
+      selectSwatch(5);
+    }
+
+    if (activeOption == 'Wood1') {
+      activeOption = 'Wood';
+      selectSwatch(6);
+    }
+
+    if (activeOption == 'Wood2') {
+      activeOption = 'Wood';
+      selectSwatch(7);
+    }
+
+    if (activeOption == 'Wood3') {
+      activeOption = 'Wood';
+      selectSwatch(8);
+    }
+
+
     // }
   }
 
@@ -196,7 +269,7 @@ function Configurator() {
     let color = colors[e];
     let new_mtl;
 
-    console.log('activeOption22222' + activeOption);
+
     if (color.texture) {
       let txt = new THREE.TextureLoader().load(color.texture, exportGLTF);
       txt.repeat.set(color.size[0], color.size[1], color.size[2]);
@@ -322,7 +395,7 @@ function Configurator() {
         let myBlob = URL.createObjectURL(blob);
         document.getElementById('viewer3').src = myBlob;
       },
-      options
+      allButtons
     );
   }
 

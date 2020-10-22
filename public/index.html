@@ -12,7 +12,8 @@
   <title>React App</title>
   <link href="https://fonts.googleapis.com/css?family=Raleway:500,700&display=swap" rel="stylesheet">
   <!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
-  <link href="./css/vectary.dcc22c.537f5a.css" rel="stylesheet" type="text/css">
+  <link href="./css/vectary.css" rel="stylesheet" type="text/css">
+
 
 </head>
 
@@ -23,7 +24,7 @@
   <div id="root"></div>
 
   <!-- Hello -->
-  <div js="mouse-move-bounds" class="h-section h-section_arapi">
+  <div class="h-section h-section_arapi">
     <div class="h-container">
       <div class="h-section_text pointerevents h-section_text-row">
         <h2 class="h-section_title h-section_title-center h-section_title-margin0">Studio3D model configurator.
@@ -169,54 +170,68 @@
               </style>
             </div>
           </div>
+
+
+
           <div class="h-customizer-subtitle">Base</div>
+
           <div class="customizer-group">
-            <div id="glossy" class="customizer-item active" data-option="Metal1">
-              <div class="customizer-item-icon glossy" data-option="Metal1"></div>
-              <div data-option="Metal1">Metal1</div>
+            <div class="customizer-item active" data-option="Metal1">
+              <div class="customizer-item-icon glossy"></div>
+              <div>Metal1</div>
             </div>
-            <div id="matte" class="customizer-item" data-option="Metal2">
-              <div class="customizer-item-icon matte" data-option="Metal2"></div>
-              <div data-option="Metal2">Metal2</div>
+            <div class="customizer-item" data-option="Metal2">
+              <div class="customizer-item-icon matte"></div>
+              <div>Metal2</div>
             </div>
-            <div id="matte" class="customizer-item" data-option="Metal3">
-              <div class="customizer-item-icon rock" data-option="Metal3"></div>
-              <div data-option="Metal3">Metal3</div>
-            </div>
-          </div>
-          <div class="h-customizer-subtitle">Pillow</div>
-          <div class="customizer-group">
-            <div id="color2" class="customizer-item active">
-              <div class="customizer-item-icon light"></div>
-              <div>Light</div>
-            </div>
-            <div id="color1" class="customizer-item">
+            <div class="customizer-item" data-option="Metal3">
               <div class="customizer-item-icon rock"></div>
-              <div>Rock</div>
-            </div>
-            <div id="color3" class="customizer-item">
-              <div class="customizer-item-icon dark"></div>
-              <div>Dark</div>
+              <div>Metal3</div>
             </div>
           </div>
+
+
+
+          <div class="h-customizer-subtitle">Pillow</div>
+
+          <div class="customizer-group">
+            <div class="customizer-item active" data-option="Pillow1">
+              <div class="customizer-item-icon light"></div>
+              <div>Pillow1</div>
+            </div>
+            <div class="customizer-item" data-option="Pillow2">
+              <div class="customizer-item-icon rock"></div>
+              <div>Pillow2</div>
+            </div>
+            <div class="customizer-item" data-option="Pillow3">
+              <div class="customizer-item-icon dark"></div>
+              <div>Pillow3</div>
+            </div>
+          </div>
+
+
 
           <div class="h-customizer-subtitle">Wood</div>
+
           <div class="customizer-group">
-            <div id="color2" class="customizer-item active">
+            <div class="customizer-item active" data-option="Wood1">
               <div class="customizer-item-icon light"></div>
-              <div>Light</div>
+              <div>Wood1</div>
             </div>
-            <div id="color1" class="customizer-item">
+            <div class="customizer-item" data-option="Wood2">
               <div class="customizer-item-icon rock"></div>
-              <div>Rock</div>
+              <div>Wood2</div>
             </div>
-            <div id="color3" class="customizer-item">
+            <div class="customizer-item" data-option="Wood3">
               <div class="customizer-item-icon dark"></div>
-              <div>Dark</div>
+              <div>Wood3</div>
             </div>
           </div>
 
+
+
           <div class="h-customizer-subtitle">Legs</div>
+
           <div class="customizer-group">
             <div id="legType2" class="customizer-item active center">
               <div>Fiberglass Leg</div>
@@ -226,6 +241,14 @@
             </div>
           </div>
         </div>
+
+
+
+
+
+
+
+
         <div class="h-viewer_containerapi">
           <div class="h-viewerarembed w-embed w-script">
             <style>
@@ -237,15 +260,15 @@
               }
             </style>
 
+
+
+
             <model-viewer data-js-focus-visible="" camera-orbit="225deg 55deg 1m" style="width: 100%; height: 100%;"
               id="viewer3" src="" ar ar-modes="webxr scene-viewer" ar-scale="auto" camera-controls alt="A 3D model">
             </model-viewer>
             <script></script>
           </div>
-          <div class="h-viewer_handler h-viewer_handler-top"></div>
-          <div class="h-viewer_handler h-viewer_handler-bottom"></div>
-          <div class="h-viewer_handler h-viewer_handler-left"></div>
-          <div class="h-viewer_handler"></div>
+
         </div>
       </div>
       <div class="h-columns pointerevents">
@@ -266,23 +289,23 @@
         </div>
       </div>
     </div>
-  </div>
-  <!-- Hello end -->
-  <div class="w-embed">
-    <style>
-      html {
-        font-size: 62.5%;
-        outline: 0 !important;
-      }
 
-      @media (max-width: 1230px) {
+    <!-- Hello end -->
+    <div class="w-embed">
+      <style>
         html {
-          font-size: 52%;
+          font-size: 62.5%;
           outline: 0 !important;
         }
-      }
-    </style>
-  </div>
+
+        @media (max-width: 1230px) {
+          html {
+            font-size: 52%;
+            outline: 0 !important;
+          }
+        }
+      </style>
+    </div>
 
 </body>
 
