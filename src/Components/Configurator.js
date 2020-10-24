@@ -1,63 +1,63 @@
-import React from 'react';
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
-import '@google/model-viewer/dist/model-viewer';
-import { Color } from 'three';
+import React from "react";
+import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter.js";
+import "@google/model-viewer/dist/model-viewer";
+// import { Color } from 'three';
 // import 'react-app-polyfill/stable';
 
 function Configurator() {
   // === THREE.JS CODE START ===
   // const spinningLoader = document.getElementById('js-loader');
   // const tray = document.getElementById('js-tray-slide');
-  const modelPath = 'test.gltf';
+  const modelPath = "test.gltf";
 
   var theModel;
   var activeOption;
 
   const colors = [
     {
-      texture: 'img/metal01.jpg',
+      texture: "img/metal01.jpg",
       size: [6, 6, 6],
       shininess: 60,
     },
     {
-      texture: 'img/metal02.jpg',
+      texture: "img/metal02.jpg",
       size: [6, 6, 6],
       shininess: 60,
     },
     {
-      texture: 'img/metal03.jpg',
+      texture: "img/metal03.jpg",
       size: [6, 6, 6],
       shininess: 60,
     },
     {
-      texture: 'img/pillow01.jpg',
+      texture: "img/pillow01.jpg",
       size: [6, 6, 6],
       shininess: 60,
     },
     {
-      texture: 'img/pillow02.jpg',
+      texture: "img/pillow02.jpg",
       size: [6, 6, 6],
       shininess: 60,
     },
     {
-      texture: 'img/pillow03.jpg',
+      texture: "img/pillow03.jpg",
       size: [6, 6, 6],
       shininess: 60,
     },
     {
-      texture: 'img/wood01.jpg',
+      texture: "img/wood01.jpg",
       size: [6, 6, 6],
       shininess: 60,
     },
     {
-      texture: 'img/wood02.jpg',
+      texture: "img/wood02.jpg",
       size: [6, 6, 6],
       shininess: 60,
     },
     {
-      texture: 'img/wood03.jpg',
+      texture: "img/wood03.jpg",
       size: [6, 6, 6],
       shininess: 60,
     },
@@ -69,7 +69,7 @@ function Configurator() {
     // },
   ];
 
-  let txt1 = new THREE.TextureLoader().load('img/metal01.jpg');
+  let txt1 = new THREE.TextureLoader().load("img/metal01.jpg");
   txt1.repeat.set([6], [6], [6]);
   txt1.wrapS = THREE.RepeatWrapping;
   txt1.wrapT = THREE.RepeatWrapping;
@@ -81,7 +81,7 @@ function Configurator() {
     shininess: 0,
   });
 
-  let txt2 = new THREE.TextureLoader().load('img/pillow01.jpg');
+  let txt2 = new THREE.TextureLoader().load("img/pillow01.jpg");
   txt2.repeat.set([6], [6], [6]);
   txt2.wrapS = THREE.RepeatWrapping;
   txt2.wrapT = THREE.RepeatWrapping;
@@ -93,7 +93,7 @@ function Configurator() {
     shininess: 0,
   });
 
-  let txt3 = new THREE.TextureLoader().load('img/wood01.jpg');
+  let txt3 = new THREE.TextureLoader().load("img/wood01.jpg");
   txt3.repeat.set([6], [6], [6]);
   txt3.wrapS = THREE.RepeatWrapping;
   txt3.wrapT = THREE.RepeatWrapping;
@@ -106,9 +106,9 @@ function Configurator() {
   });
 
   const initialMap = [
-    { childID: 'Metal', mtl: initialMaterial1 },
-    { childID: 'Pillow', mtl: initialMaterial2 },
-    { childID: 'Wood', mtl: initialMaterial3 },
+    { childID: "Metal", mtl: initialMaterial1 },
+    { childID: "Pillow", mtl: initialMaterial2 },
+    { childID: "Wood", mtl: initialMaterial3 },
   ];
 
   // Init the object loader
@@ -183,14 +183,19 @@ function Configurator() {
   // Select Option
   // const options = document.querySelectorAll(".customizer-group.customizer-item");
 
-  const allButtons = document.querySelectorAll(".customizer-group .customizer-item");
-  allButtons.forEach(b => b.addEventListener("click", e => {
-    e.currentTarget.parentNode.querySelectorAll(".customizer-group .customizer-item")
-      .forEach(button => button.classList.remove("active"));
-    e.currentTarget.classList.add("active");
-    activeOption = e.currentTarget.dataset.option;
-    selectOption();
-  }));
+  const allButtons = document.querySelectorAll(
+    ".customizer-group .customizer-item"
+  );
+  allButtons.forEach((b) =>
+    b.addEventListener("click", (e) => {
+      e.currentTarget.parentNode
+        .querySelectorAll(".customizer-group .customizer-item")
+        .forEach((button) => button.classList.remove("active"));
+      e.currentTarget.classList.add("active");
+      activeOption = e.currentTarget.dataset.option;
+      selectOption();
+    })
+  );
 
   // for (const option of options) {
 
@@ -199,10 +204,7 @@ function Configurator() {
   // }
 
   function selectOption(e) {
-
-
     // let option = e.target;
-
 
     // for (const otherOption of options) {
     //   otherOption.classList.remove('active');
@@ -211,64 +213,62 @@ function Configurator() {
 
     // option.classList.add('active');
 
-    if (activeOption == 'Metal1') {
-      activeOption = 'Metal';
+    if (activeOption === "Metal1") {
+      activeOption = "Metal";
       selectSwatch(0);
     }
-    if (activeOption == 'Metal2') {
-      activeOption = 'Metal';
+    if (activeOption === "Metal2") {
+      activeOption = "Metal";
       selectSwatch(1);
     }
-    if (activeOption == 'Metal3') {
-      activeOption = 'Metal';
+    if (activeOption === "Metal3") {
+      activeOption = "Metal";
       selectSwatch(2);
     }
 
-    if (activeOption == 'Pillow1') {
-      activeOption = 'Pillow';
+    if (activeOption === "Pillow1") {
+      activeOption = "Pillow";
       selectSwatch(3);
     }
 
-    if (activeOption == 'Pillow2') {
-      activeOption = 'Pillow';
+    if (activeOption === "Pillow2") {
+      activeOption = "Pillow";
       selectSwatch(4);
     }
 
-    if (activeOption == 'Pillow3') {
-      activeOption = 'Pillow';
+    if (activeOption === "Pillow3") {
+      activeOption = "Pillow";
       selectSwatch(5);
     }
 
-    if (activeOption == 'Wood1') {
-      activeOption = 'Wood';
+    if (activeOption === "Wood1") {
+      activeOption = "Wood";
       selectSwatch(6);
     }
 
-    if (activeOption == 'Wood2') {
-      activeOption = 'Wood';
+    if (activeOption === "Wood2") {
+      activeOption = "Wood";
       selectSwatch(7);
     }
 
-    if (activeOption == 'Wood3') {
-      activeOption = 'Wood';
+    if (activeOption === "Wood3") {
+      activeOption = "Wood";
       selectSwatch(8);
     }
-
 
     // }
   }
 
   // Swatches
-  const swatches = document.querySelectorAll('.tray__swatch');
+  const swatches = document.querySelectorAll(".tray__swatch");
 
   for (const swatch of swatches) {
-    swatch.addEventListener('click', selectSwatch);
+    swatch.addEventListener("click", selectSwatch);
   }
 
   function selectSwatch(e) {
     let color = colors[e];
     let new_mtl;
-
 
     if (color.texture) {
       let txt = new THREE.TextureLoader().load(color.texture, exportGLTF);
@@ -279,36 +279,36 @@ function Configurator() {
         map: txt,
         shininess: color.shininess ? color.shininess : 10,
       });
-      console.log('Color: ' + color.color);
+      console.log("Color: " + color.color);
 
       console.log(new_mtl);
       console.log(theModel);
       console.log(activeOption);
-      console.log('Active' + new_mtl);
+      console.log("Active" + new_mtl);
 
       setMaterial(theModel, activeOption, new_mtl);
     } else {
       new_mtl = new THREE.MeshPhongMaterial({
-        color: parseInt('0x' + color.color),
+        color: parseInt("0x" + color.color),
         shininess: color.shininess ? color.shininess : 10,
       });
-      console.log('Color: ' + color.color);
+      console.log("Color: " + color.color);
       console.log(new_mtl);
       console.log(theModel);
       console.log(activeOption);
-      console.log('Active' + new_mtl);
+      console.log("Active" + new_mtl);
       setMaterial(theModel, activeOption, new_mtl);
       exportGLTF();
     }
   }
 
   function setMaterial(parent, type, mtl) {
-    console.log('parent' + parent);
-    console.log('type' + type);
-    console.log('mtl' + mtl);
+    console.log("parent" + parent);
+    console.log("type" + type);
+    console.log("mtl" + mtl);
     parent.traverse((o) => {
       if (o.isMesh && o.nameID != null) {
-        if (o.nameID == type) {
+        if (o.nameID === type) {
           o.material = mtl;
         }
       }
@@ -391,9 +391,9 @@ function Configurator() {
       theModel,
       function (result) {
         let output = JSON.stringify(result, null, 2);
-        let blob = new Blob([output], { type: 'application/json' });
+        let blob = new Blob([output], { type: "application/json" });
         let myBlob = URL.createObjectURL(blob);
-        document.getElementById('viewer3').src = myBlob;
+        document.getElementById("viewer3").src = myBlob;
       },
       allButtons
     );

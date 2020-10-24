@@ -1,491 +1,637 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WebAR</title>
+  </head>
 
-    <!-- <link href="../css/normalize.4d1346.4f8a21.css" rel="stylesheet" type="text/css"> -->
-    <link href="../css/components.1abf18.1abf18.css" rel="stylesheet" type="text/css">
-    <link href="../css/vectary.dcc22c.537f5a.css" rel="stylesheet" type="text/css">
-
-</head>
-
-<body class="body-4" data-ix="new-interaction">
-
+  <body class="body-4" data-ix="new-interaction">
     <div js="mouse-move-bounds" class="h-section h-section_arapi">
-        <div class="h-container">
-            <div class="h-section_text pointerevents h-section_text-row">
-                <h2 class="h-section_title h-section_title-center h-section_title-margin0">API to customize every aspect
-                    of the experience</h2>
-                <p class="h-section_p h-section_p-center h-section_p-margin0">For times when you need to go beyond the
-                    ordinary, Vectary Web AR features full programmatic access. Take advantage of the API to custom
-                    tailor the experience to your audience.</p>
-            </div>
-            <div class="h-arapiviewer">
-                <div class="h-ar-form">
-                    <div class="h-customizer-subtitle">Color</div>
-                    <div class="customizer-group">
-                        <div class="customizer-item hue active w-embed">
-                            <div id="hue-color"><span></span></div>
-                            <input id="hue" type="range" min="0" max="350" value="340" step="1">
-                            <input type="text" id="hue-hex">
-                            <style>
-                                :root {
-                                    --hue-range-color: rgb(99, 54, 79);
-                                    ;
-                                }
-
-                                #hue-color {
-                                    position: absolute;
-                                    left: 85%;
-                                    display: block;
-                                    background: #A36B80;
-                                    background: var(--hue-range-color);
-                                    width: 22px;
-                                    height: 40px;
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    border-radius: 12px;
-                                    cursor: pointer;
-                                    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
-                                    pointer-events: none;
-                                }
-
-                                #hue-color span {
-                                    display: block;
-                                    width: 2px;
-                                    height: 12px;
-                                    border-radius: 2px;
-                                    background-color: rgba(255, 255, 255, 0.4);
-                                }
-
-                                #hue {
-                                    width: 100%;
-                                    height: 30px;
-                                    border-radius: 2px;
-                                    -webkit-appearance: none;
-                                    -moz-appearance: none;
-                                    appearance: none;
-                                    border: none;
-                                    outline: none;
-                                    margin: 0;
-                                    outline: 0;
-                                    background: transparent;
-                                    cursor: pointer;
-                                }
-
-                                #hue::-webkit-slider-thumb {
-                                    opacity: 0;
-                                }
-
-                                #hue::-moz-range-thumb {
-                                    opacity: 0;
-                                }
-
-                                #hue::-ms-thumb {
-                                    opacity: 0;
-                                }
-
-                                #hue::-webkit-slider-runnable-track {
-                                    -webkit-appearance: none;
-                                    -moz-appearance: none;
-                                    appearance: none;
-                                    border-radius: 2px;
-                                    background: -moz-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                                    /* FF3.6+ */
-                                    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 0, 0, 0.3)), color-stop(16.66666666666667%, rgba(255, 255, 0, 0.3)), color-stop(33.33%, rgba(0, 255, 0, 0.3)), color-stop(50%, rgba(0, 255, 254, 0.3)), color-stop(66.66666666666667%, rgba(0, 0, 255, 0.3)), color-stop(83.33333333333333%, rgba(254, 0, 255, 0.3)), color-stop(100%, rgba(255, 0, 0, 0.3))), rgba(155, 155, 155, 0.7);
-                                    /* Chrome,Safari4+ */
-                                    background: -webkit-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                                    /* Chrome10+,Safari5.1+ */
-                                    background: -o-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                                    /* Opera 11.10+ */
-                                    background: -ms-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                                    /* IE10+ */
-                                    background: linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                                    /* W3C */
-                                    height: 3px;
-                                }
-
-                                #hue::-moz-range-track {
-                                    -webkit-appearance: none;
-                                    -moz-appearance: none;
-                                    appearance: none;
-                                    border-radius: 2px;
-                                    background: -moz-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                                    /* FF3.6+ */
-                                    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 0, 0, 0.3)), color-stop(16.66666666666667%, rgba(255, 255, 0, 0.3)), color-stop(33.33%, rgba(0, 255, 0, 0.3)), color-stop(50%, rgba(0, 255, 254, 0.3)), color-stop(66.66666666666667%, rgba(0, 0, 255, 0.3)), color-stop(83.33333333333333%, rgba(254, 0, 255, 0.3)), color-stop(100%, rgba(255, 0, 0, 0.3))), rgba(155, 155, 155, 0.7);
-                                    /* Chrome,Safari4+ */
-                                    background: -webkit-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                                    /* Chrome10+,Safari5.1+ */
-                                    background: -o-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                                    /* Opera 11.10+ */
-                                    background: -ms-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                                    /* IE10+ */
-                                    background: linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                                    /* W3C */
-                                    height: 3px;
-                                }
-
-                                #hue::-ms-track {
-                                    -webkit-appearance: none;
-                                    -moz-appearance: none;
-                                    appearance: none;
-                                    border-radius: 2px;
-                                    background: -moz-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                                    /* FF3.6+ */
-                                    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 0, 0, 0.3)), color-stop(16.66666666666667%, rgba(255, 255, 0, 0.3)), color-stop(33.33%, rgba(0, 255, 0, 0.3)), color-stop(50%, rgba(0, 255, 254, 0.3)), color-stop(66.66666666666667%, rgba(0, 0, 255, 0.3)), color-stop(83.33333333333333%, rgba(254, 0, 255, 0.3)), color-stop(100%, rgba(255, 0, 0, 0.3))), rgba(155, 155, 155, 0.7);
-                                    /* Chrome,Safari4+ */
-                                    background: -webkit-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                                    /* Chrome10+,Safari5.1+ */
-                                    background: -o-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                                    /* Opera 11.10+ */
-                                    background: -ms-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                                    /* IE10+ */
-                                    background: linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                                    /* W3C */
-                                    height: 3px;
-                                }
-
-                                #hue-hex {
-                                    display: none;
-                                }
-
-                                #color {
-                                    width: 20px;
-                                    height: 20px;
-                                    margin-right: 10px;
-                                }
-                            </style>
-                        </div>
-                    </div>
-                    <div class="h-customizer-subtitle">Softshell</div>
-                    <div class="customizer-group">
-                        <div id="glossy" class="customizer-item active">
-                            <div class="customizer-item-icon glossy"></div>
-                            <div>Glossy</div>
-                        </div>
-                        <div id="matte" class="customizer-item">
-                            <div class="customizer-item-icon matte"></div>
-                            <div>Matte</div>
-                        </div>
-                    </div>
-                    <div class="h-customizer-subtitle">Upholstery</div>
-                    <div class="customizer-group">
-                        <div id="color2" class="customizer-item active">
-                            <div class="customizer-item-icon light"></div>
-                            <div>Light</div>
-                        </div>
-                        <div id="color1" class="customizer-item">
-                            <div class="customizer-item-icon rock"></div>
-                            <div>Rock</div>
-                        </div>
-                        <div id="color3" class="customizer-item">
-                            <div class="customizer-item-icon dark"></div>
-                            <div>Dark</div>
-                        </div>
-                    </div>
-                    <div class="h-customizer-subtitle">Legs</div>
-                    <div class="customizer-group">
-                        <div id="legType2" class="customizer-item active center">
-                            <div>Fiberglass Leg</div>
-                        </div>
-                        <div id="legType1" class="customizer-item center">
-                            <div>Rod Frame</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="h-viewer_containerapi">
-                    <div class="h-viewerarembed w-embed w-script">
-                        <style>
-                            .h-section.h-section_arapi {
-                                background: var(--hue-range-color);
-                            }
-                        </style>
-                        <vctr-viewer id="viewer3" model="4d439a67-c3b1-4726-84bf-51c555719c2e" noar="1" loadglb="1"
-                            autoload="0" showpreloader="0" showinteractionprompt="0" turntable="0"
-                            gesturehandling="superior" enableapi="1" zoom="0" pany="0" panx="0" envmode="prod">
-                        </vctr-viewer>
-                        <script></script>
-                    </div>
-                    <div class="h-viewer_handler h-viewer_handler-top"></div>
-                    <div class="h-viewer_handler h-viewer_handler-bottom"></div>
-                    <div class="h-viewer_handler h-viewer_handler-left"></div>
-                    <div class="h-viewer_handler"></div>
-                </div>
-            </div>
-            <div class="h-columns pointerevents">
-                <div class="h-column">
-                    <div class="h-column_title">Object &amp; Material Changes</div>
-                    <div class="h-column_p h-column_p-white">Dynamically change scene lights, materials and all object
-                        properties like visibility, rotation, position and scale.</div>
-                </div>
-                <div class="h-column">
-                    <div class="h-column_title">Animations</div>
-                    <div class="h-column_p h-column_p-white">Switch from pre-selected views, define orbits, animate
-                        objects or build exploding views into your composition.</div>
-                </div>
-                <div class="h-column">
-                    <div class="h-column_title">Meta Operations</div>
-                    <div class="h-column_p h-column_p-white">Your entire scene is API accessible, allowing you to build
-                        solutions like annotations attached to objects or even image export.</div>
-                </div>
-            </div>
-            <div class="h-section_subbutton"><a data-event="tryVectary" href="https://vectary.github.io/viewer-api/#/"
-                    target="_blank" class="h-btn h-btn-white h-btn-margin10 w-button">Learn more about API</a><a
-                    data-event="tryVectary" href="/signup" class="h-btn h-btn-white w-button">Try Vectary for free</a>
-            </div>
+      <div class="h-container">
+        <div class="h-section_text pointerevents h-section_text-row">
+          <h2
+            class="h-section_title h-section_title-center h-section_title-margin0"
+          >
+            API to customize every aspect of the experience
+          </h2>
+          <p class="h-section_p h-section_p-center h-section_p-margin0">
+            For times when you need to go beyond the ordinary, Vectary Web AR
+            features full programmatic access. Take advantage of the API to
+            custom tailor the experience to your audience.
+          </p>
         </div>
-    </div>
+        <div class="h-arapiviewer">
+          <div class="h-ar-form">
+            <div class="h-customizer-subtitle">Color</div>
+            <div class="customizer-group">
+              <div class="customizer-item hue active w-embed">
+                <div id="hue-color"><span></span></div>
+                <input
+                  id="hue"
+                  type="range"
+                  min="0"
+                  max="350"
+                  value="340"
+                  step="1"
+                />
+                <input type="text" id="hue-hex" />
+                <style>
+                  :root {
+                    --hue-range-color: rgb(99, 54, 79);
+                  }
 
+                  #hue-color {
+                    position: absolute;
+                    left: 85%;
+                    display: block;
+                    background: #a36b80;
+                    background: var(--hue-range-color);
+                    width: 22px;
+                    height: 40px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 12px;
+                    cursor: pointer;
+                    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+                    pointer-events: none;
+                  }
+
+                  #hue-color span {
+                    display: block;
+                    width: 2px;
+                    height: 12px;
+                    border-radius: 2px;
+                    background-color: rgba(255, 255, 255, 0.4);
+                  }
+
+                  #hue {
+                    width: 100%;
+                    height: 30px;
+                    border-radius: 2px;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    border: none;
+                    outline: none;
+                    margin: 0;
+                    outline: 0;
+                    background: transparent;
+                    cursor: pointer;
+                  }
+
+                  #hue::-webkit-slider-thumb {
+                    opacity: 0;
+                  }
+
+                  #hue::-moz-range-thumb {
+                    opacity: 0;
+                  }
+
+                  #hue::-ms-thumb {
+                    opacity: 0;
+                  }
+
+                  #hue::-webkit-slider-runnable-track {
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    border-radius: 2px;
+                    background: -moz-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* FF3.6+ */
+                    background: -webkit-gradient(
+                        linear,
+                        left top,
+                        right top,
+                        color-stop(0%, rgba(255, 0, 0, 0.3)),
+                        color-stop(16.66666666666667%, rgba(255, 255, 0, 0.3)),
+                        color-stop(33.33%, rgba(0, 255, 0, 0.3)),
+                        color-stop(50%, rgba(0, 255, 254, 0.3)),
+                        color-stop(66.66666666666667%, rgba(0, 0, 255, 0.3)),
+                        color-stop(83.33333333333333%, rgba(254, 0, 255, 0.3)),
+                        color-stop(100%, rgba(255, 0, 0, 0.3))
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Chrome,Safari4+ */
+                    background: -webkit-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Chrome10+,Safari5.1+ */
+                    background: -o-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Opera 11.10+ */
+                    background: -ms-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* IE10+ */
+                    background: linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* W3C */
+                    height: 3px;
+                  }
+
+                  #hue::-moz-range-track {
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    border-radius: 2px;
+                    background: -moz-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* FF3.6+ */
+                    background: -webkit-gradient(
+                        linear,
+                        left top,
+                        right top,
+                        color-stop(0%, rgba(255, 0, 0, 0.3)),
+                        color-stop(16.66666666666667%, rgba(255, 255, 0, 0.3)),
+                        color-stop(33.33%, rgba(0, 255, 0, 0.3)),
+                        color-stop(50%, rgba(0, 255, 254, 0.3)),
+                        color-stop(66.66666666666667%, rgba(0, 0, 255, 0.3)),
+                        color-stop(83.33333333333333%, rgba(254, 0, 255, 0.3)),
+                        color-stop(100%, rgba(255, 0, 0, 0.3))
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Chrome,Safari4+ */
+                    background: -webkit-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Chrome10+,Safari5.1+ */
+                    background: -o-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Opera 11.10+ */
+                    background: -ms-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* IE10+ */
+                    background: linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* W3C */
+                    height: 3px;
+                  }
+
+                  #hue::-ms-track {
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    border-radius: 2px;
+                    background: -moz-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* FF3.6+ */
+                    background: -webkit-gradient(
+                        linear,
+                        left top,
+                        right top,
+                        color-stop(0%, rgba(255, 0, 0, 0.3)),
+                        color-stop(16.66666666666667%, rgba(255, 255, 0, 0.3)),
+                        color-stop(33.33%, rgba(0, 255, 0, 0.3)),
+                        color-stop(50%, rgba(0, 255, 254, 0.3)),
+                        color-stop(66.66666666666667%, rgba(0, 0, 255, 0.3)),
+                        color-stop(83.33333333333333%, rgba(254, 0, 255, 0.3)),
+                        color-stop(100%, rgba(255, 0, 0, 0.3))
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Chrome,Safari4+ */
+                    background: -webkit-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Chrome10+,Safari5.1+ */
+                    background: -o-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Opera 11.10+ */
+                    background: -ms-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* IE10+ */
+                    background: linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* W3C */
+                    height: 3px;
+                  }
+
+                  #hue-hex {
+                    display: none;
+                  }
+
+                  #color {
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 10px;
+                  }
+                </style>
+              </div>
+            </div>
+
+            <div class="h-customizer-subtitle">Softshell</div>
+            <div class="customizer-group">
+              <div id="glossy" class="customizer-item active">
+                <div class="customizer-item-icon glossy"></div>
+                <div>Glossy</div>
+              </div>
+              <div id="matte" class="customizer-item">
+                <div class="customizer-item-icon matte"></div>
+                <div>Matte</div>
+              </div>
+            </div>
+            <div class="h-customizer-subtitle">Upholstery</div>
+            <div class="customizer-group">
+              <div id="color2" class="customizer-item active">
+                <div class="customizer-item-icon light"></div>
+                <div>Light</div>
+              </div>
+              <div id="color1" class="customizer-item">
+                <div class="customizer-item-icon rock"></div>
+                <div>Rock</div>
+              </div>
+              <div id="color3" class="customizer-item">
+                <div class="customizer-item-icon dark"></div>
+                <div>Dark</div>
+              </div>
+            </div>
+            <div class="h-customizer-subtitle">Legs</div>
+            <div class="customizer-group">
+              <div id="legType2" class="customizer-item active center">
+                <div>Fiberglass Leg</div>
+              </div>
+              <div id="legType1" class="customizer-item center">
+                <div>Rod Frame</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="h-viewer_containerapi">
+            <div class="h-viewerarembed w-embed w-script">
+              <style>
+                .h-section.h-section_arapi {
+                  background: var(--hue-range-color);
+                }
+              </style>
+              <vctr-viewer id="viewer3"> </vctr-viewer>
+
+              <script></script>
+            </div>
+            <div class="h-viewer_handler h-viewer_handler-top"></div>
+            <div class="h-viewer_handler h-viewer_handler-bottom"></div>
+            <div class="h-viewer_handler h-viewer_handler-left"></div>
+            <div class="h-viewer_handler"></div>
+          </div>
+        </div>
+        <div class="h-columns pointerevents">
+          <div class="h-column">
+            <div class="h-column_title">Object &amp; Material Changes</div>
+            <div class="h-column_p h-column_p-white">
+              Dynamically change scene lights, materials and all object
+              properties like visibility, rotation, position and scale.
+            </div>
+          </div>
+          <div class="h-column">
+            <div class="h-column_title">Animations</div>
+            <div class="h-column_p h-column_p-white">
+              Switch from pre-selected views, define orbits, animate objects or
+              build exploding views into your composition.
+            </div>
+          </div>
+          <div class="h-column">
+            <div class="h-column_title">Meta Operations</div>
+            <div class="h-column_p h-column_p-white">
+              Your entire scene is API accessible, allowing you to build
+              solutions like annotations attached to objects or even image
+              export.
+            </div>
+          </div>
+        </div>
+        <div class="h-section_subbutton">
+          <a
+            data-event="tryVectary"
+            href="https://vectary.github.io/viewer-api/#/"
+            target="_blank"
+            class="h-btn h-btn-white h-btn-margin10 w-button"
+            >Learn more about API</a
+          ><a
+            data-event="tryVectary"
+            href="/signup"
+            class="h-btn h-btn-white w-button"
+            >Try Vectary for free</a
+          >
+        </div>
+      </div>
+    </div>
 
     <div class="w-embed w-script">
-        <script type="module" src="../vectary/viewer/v1/scripts/vctr-viewer.js"></script>
-        <script type="module">
-            import { VctrApi } from "../vectary/viewer-api/v1/api.js";
-            let api1, api2, api3;
-            const log = "vctr-opti";
-            async function run() {
-                function errHandler(err) {
-                    console.log("API error", err);
-                }
-                async function onReadyViewer(id, api) {
-                    let globalRotX = 0;
-                    let globalRotY = 0;
-                    const rangeTune = 0.5; // used to finetune rotation range
-                    document.querySelector(`#${id}`).closest('[js="mouse-move-bounds"').addEventListener("mousemove", async e => {
-                        const normX = e.clientX / window.innerWidth;
-                        const normY = e.clientY / window.innerHeight;
-                        const rotX = (rangeTune * (normX - 0.5));
-                        const rotY = (rangeTune * (normY - 0.5));
-                        api.rotateView([rotX - globalRotX, rotY - globalRotY]);
-                        globalRotX = rotX;
-                        globalRotY = rotY;
-                    });
-                }
-                async function onReadyWatch(id, api) {
-                    let globalRotX = 0;
-                    let globalRotY = 0;
-                    const rangeTune = 0.5; // used to finetune rotation range
-                    api.setUUIDAr("cf69d352-ff75-4cd2-a825-887a196205fd");
-                    const ARLink = document.querySelector("#arLink");
-                    ARLink.addEventListener("click", (e) => {
-                        e.preventDefault();
-                        api.triggerARClick();
-                    });
-                    document.querySelector(`#${id}`).closest('[js="mouse-move-bounds"').addEventListener("mousemove", async e => {
-                        const normX = e.clientX / window.innerWidth;
-                        const normY = e.clientY / window.innerHeight;
-                        const rotX = (rangeTune * (normX - 0.5));
-                        const rotY = (rangeTune * (normY - 0.5));
-                        api.rotateView([rotX - globalRotX, rotY - globalRotY]);
-                        globalRotX = rotX;
-                        globalRotY = rotY;
-                    });
-                }
-                async function onReadyLast(id, vctrApi) {
-                    console.log("API ready..");
-                    /******* Last 3D Viewer *******/
-                    /* Set defaults */
-                    vctrApi.setVisibility("LegFb", true, false);
-                    vctrApi.setVisibility("LegRod", false, false);
-                    let globalRotX = 0;
-                    let globalRotY = 0;
-                    const rangeTune = 0.8;
-                    document.querySelector(`#${id}`).closest('[js="mouse-move-bounds"').addEventListener("mousemove", async e => {
-                        const normX = e.clientX / window.innerWidth;
-                        const normY = e.clientY / window.innerHeight;
-                        const rotX = (rangeTune * (normX - 0.5));
-                        const rotY = (rangeTune * (normY - 0.5));
-                        vctrApi.rotateView([rotX - globalRotX, rotY - globalRotY]);
-                        globalRotX = rotX;
-                        globalRotY = rotY;
-                    });
-                    function changeMaterial(updatedMaterial) {
-                        vctrApi.updateMaterial("LegFBShell1", updatedMaterial);
-                        vctrApi.updateMaterial("LegFBShell2", updatedMaterial);
-                        vctrApi.updateMaterial("Pillow1", updatedMaterial);
-                        vctrApi.updateMaterial("Pillow2", updatedMaterial);
-                        vctrApi.updateMaterial("LegRod1", updatedMaterial);
-                        vctrApi.updateMaterial("LegRod2", updatedMaterial);
-                    }
-                    function changeRoughness(updatedMaterial) {
-                        vctrApi.updateMaterial("LegFBShell1", updatedMaterial);
-                        vctrApi.updateMaterial("LegFBShell2", updatedMaterial);
-                        vctrApi.updateMaterial("LegRod1", updatedMaterial);
-                        vctrApi.updateMaterial("LegRod2", updatedMaterial);
-                    }
-                    function changeSoftshell(updatedMaterial) {
-                        vctrApi.updateMaterial("SoftShell", updatedMaterial);
-                    }
-                    document.querySelector("#color1").addEventListener("click", _e => {
-                        const updatedMaterial = { color: "#ad9a92" };
-                        changeSoftshell(updatedMaterial);
-                    });
-                    document.querySelector("#color2").addEventListener("click", _e => {
-                        const updatedMaterial = { color: "#7f8499" };
-                        changeSoftshell(updatedMaterial);
-                    });
-                    document.querySelector("#color3").addEventListener("click", _e => {
-                        const updatedMaterial = { color: "#202745" };
-                        changeSoftshell(updatedMaterial);
-                    });
-                    document.querySelector("#matte").addEventListener("click", _e => {
-                        const updatedMaterial = { roughness: 0.6 };
-                        changeRoughness(updatedMaterial);
-                    });
-                    document.querySelector("#glossy").addEventListener("click", _e => {
-                        const updatedMaterial = { roughness: 0.03 };
-                        changeRoughness(updatedMaterial);
-                    });
-                    document.querySelector("#legType1").addEventListener("click", _e => {
-                        vctrApi.setVisibility("LegFb", false, false);
-                        vctrApi.setVisibility("LegRod", true, false);
-                    });
-                    document.querySelector("#legType2").addEventListener("click", _e => {
-                        vctrApi.setVisibility("LegFb", true, false);
-                        vctrApi.setVisibility("LegRod", false, false);
-                    });
-                    document.querySelector("#hue").addEventListener("input", e => {
-                        const h = e.currentTarget.value;
-                        const s = 30;
-                        const l = 30;
-                        const newColor = HSLAToHexA(h, s, l);
-                        document.querySelector("#hue-hex").value = newColor;
-                        document.querySelector("#hue-color").style.backgroundColor = newColor;
-                        document.querySelector(".h-section_arapi").style.backgroundColor = newColor;
-                        const updatedMaterial = { color: newColor };
-                        changeMaterial(updatedMaterial);
-                        setPositionToRangeHandler(newColor);
-                    });
-                    function changeColorAutomaticaly() {
-                        let i = 0;
-                        const interval = setInterval(function () {
-                            const newColor = HSLAToHexA(i, 30, 30);
-                            //$('#color').css('background-color', newColor);
-                            document.querySelector("#hue").value = i;
-                            changeMaterial({ color: newColor });
-                            setPositionToRangeHandler(newColor);
-                            i = i > 350 ? 0 : i + 1
-                        }, 50);
-                        document.querySelector("#hue").addEventListener("change", _e => {
-                            clearInterval(interval);
-                        });
-                        document.querySelector("#hue").addEventListener("mousedown", _e => {
-                            clearInterval(interval);
-                        });
-                    }
-                    function setPositionToRangeHandler(newColor) {
-                        const sliderRange = document.querySelector("#hue").value;
-                        const sliderPosition = 2.5 + (93 / 360 * sliderRange);
-                        const sliderColor = newColor;
-                        document.documentElement.style.setProperty("--hue-range-color", sliderColor);
-                        document.querySelector("#hue-color").style.left = sliderPosition + "%";
-                    }
-                    function HSLAToHexA(h, s, l) {
-                        s /= 100;
-                        l /= 100;
-                        let c = (1 - Math.abs(2 * l - 1)) * s,
-                            x = c * (1 - Math.abs((h / 60) % 2 - 1)),
-                            m = l - c / 2,
-                            r = 0,
-                            g = 0,
-                            b = 0;
-                        if (0 <= h && h < 60) {
-                            r = c; g = x; b = 0;
-                        } else if (60 <= h && h < 120) {
-                            r = x; g = c; b = 0;
-                        } else if (120 <= h && h < 180) {
-                            r = 0; g = c; b = x;
-                        } else if (180 <= h && h < 240) {
-                            r = 0; g = x; b = c;
-                        } else if (240 <= h && h < 300) {
-                            r = x; g = 0; b = c;
-                        } else if (300 <= h && h < 360) {
-                            r = c; g = 0; b = x;
-                        }
-                        // Having obtained RGB, convert channels to hex
-                        r = Math.round((r + m) * 255).toString(16);
-                        g = Math.round((g + m) * 255).toString(16);
-                        b = Math.round((b + m) * 255).toString(16);
-                        if (r.length == 1) r = "0" + r;
-                        if (g.length == 1) g = "0" + g;
-                        if (b.length == 1) b = "0" + b;
-                        return "#" + r + g + b;
-                    }
-                    const allButtons = document.querySelectorAll(".customizer-group .customizer-item");
-                    allButtons.forEach(b => b.addEventListener("click", e => {
-                        e.currentTarget.parentNode.querySelectorAll(".customizer-group .customizer-item")
-                            .forEach(button => button.classList.remove("active"));
-                        e.currentTarget.classList.add("active");
-                    }));
-                    changeColorAutomaticaly();
-                }
-                try {
-                    let iteration = 0;
-                    async function initViewer(id, onReady) {
-                        console.log(`\n${log} viewer ${++iteration} ${id}`);
-                        const api = new VctrApi(id, errHandler);
-                        await api.init();
-                        await api.load();
-                        await onReady(id, api);
-                    }
-                    if ('IntersectionObserver' in window) {
-                        const IntObsOpts = {
-                            rootMargin: '100px',
-                            threshold: 0
-                        }
-                        const callback = (entries, observer) => {
-                            entries.forEach(entry => {
-                                if (entry.isIntersecting) {
-                                    switch (entry.target.id) {
-                                        case "test":
-                                            initViewer(entry.target.id, onReadyViewer);
-                                            break;
-                                        case "watch":
-                                            initViewer(entry.target.id, onReadyWatch);
-                                            break;
-                                        case "viewer3":
-                                            initViewer(entry.target.id, onReadyLast);
-                                            break;
-                                    }
-                                    observer.unobserve(entry.target);
-                                }
-                            });
-                        };
-                        const observer = new IntersectionObserver(callback, IntObsOpts);
-                        const targets = document.querySelectorAll("vctr-viewer");
-                        targets.forEach(target => observer.observe(target));
-                    }
-                    else {
-                        await initViewer("test", onReadyViewer);
-                        await initViewer("watch", onReadyWatch);
-                        await initViewer("viewer3", onReadyLast);
-                    }
-                } catch (e) {
-                    errHandler(e);
-                }
+      <script>
+        async function run() {
+          async function onReadyLast(id) {
+            console.log("API ready..");
+            /******* Last 3D Viewer *******/
+            /* Set defaults */
+            // vctrApi.setVisibility("LegFb", true, false);
+            // vctrApi.setVisibility("LegRod", false, false);
+            let globalRotX = 0;
+            let globalRotY = 0;
+            const rangeTune = 0.8;
+            document
+              .querySelector(`#${id}`)
+              .closest('[js="mouse-move-bounds"')
+              .addEventListener("mousemove", async (e) => {
+                const normX = e.clientX / window.innerWidth;
+                const normY = e.clientY / window.innerHeight;
+                const rotX = rangeTune * (normX - 0.5);
+                const rotY = rangeTune * (normY - 0.5);
+                // vctrApi.rotateView([rotX - globalRotX, rotY - globalRotY]);
+                globalRotX = rotX;
+                globalRotY = rotY;
+              });
+            function changeMaterial(updatedMaterial) {
+              //   vctrApi.updateMaterial("LegFBShell1", updatedMaterial);
+              //   vctrApi.updateMaterial("LegFBShell2", updatedMaterial);
+              //   vctrApi.updateMaterial("Pillow1", updatedMaterial);
+              //   vctrApi.updateMaterial("Pillow2", updatedMaterial);
+              //   vctrApi.updateMaterial("LegRod1", updatedMaterial);
+              //   vctrApi.updateMaterial("LegRod2", updatedMaterial);
             }
-            run();
-        </script>
+
+            document.querySelector("#hue").addEventListener("input", (e) => {
+              const h = e.currentTarget.value;
+              const s = 30;
+              const l = 30;
+              const newColor = HSLAToHexA(h, s, l);
+              document.querySelector("#hue-hex").value = newColor;
+              document.querySelector(
+                "#hue-color"
+              ).style.backgroundColor = newColor;
+              document.querySelector(
+                ".h-section_arapi"
+              ).style.backgroundColor = newColor;
+              const updatedMaterial = { color: newColor };
+              changeMaterial(updatedMaterial);
+              setPositionToRangeHandler(newColor);
+            });
+            function changeColorAutomaticaly() {
+              let i = 0;
+              const interval = setInterval(function () {
+                const newColor = HSLAToHexA(i, 30, 30);
+                //$('#color').css('background-color', newColor);
+                document.querySelector("#hue").value = i;
+                changeMaterial({ color: newColor });
+                setPositionToRangeHandler(newColor);
+                i = i > 350 ? 0 : i + 1;
+              }, 50);
+              document
+                .querySelector("#hue")
+                .addEventListener("change", (_e) => {
+                  clearInterval(interval);
+                });
+              document
+                .querySelector("#hue")
+                .addEventListener("mousedown", (_e) => {
+                  clearInterval(interval);
+                });
+            }
+            function setPositionToRangeHandler(newColor) {
+              const sliderRange = document.querySelector("#hue").value;
+              const sliderPosition = 2.5 + (93 / 360) * sliderRange;
+              const sliderColor = newColor;
+              document.documentElement.style.setProperty(
+                "--hue-range-color",
+                sliderColor
+              );
+              document.querySelector("#hue-color").style.left =
+                sliderPosition + "%";
+            }
+            function HSLAToHexA(h, s, l) {
+              s /= 100;
+              l /= 100;
+              let c = (1 - Math.abs(2 * l - 1)) * s,
+                x = c * (1 - Math.abs(((h / 60) % 2) - 1)),
+                m = l - c / 2,
+                r = 0,
+                g = 0,
+                b = 0;
+              if (0 <= h && h < 60) {
+                r = c;
+                g = x;
+                b = 0;
+              } else if (60 <= h && h < 120) {
+                r = x;
+                g = c;
+                b = 0;
+              } else if (120 <= h && h < 180) {
+                r = 0;
+                g = c;
+                b = x;
+              } else if (180 <= h && h < 240) {
+                r = 0;
+                g = x;
+                b = c;
+              } else if (240 <= h && h < 300) {
+                r = x;
+                g = 0;
+                b = c;
+              } else if (300 <= h && h < 360) {
+                r = c;
+                g = 0;
+                b = x;
+              }
+              // Having obtained RGB, convert channels to hex
+              r = Math.round((r + m) * 255).toString(16);
+              g = Math.round((g + m) * 255).toString(16);
+              b = Math.round((b + m) * 255).toString(16);
+              if (r.length == 1) r = "0" + r;
+              if (g.length == 1) g = "0" + g;
+              if (b.length == 1) b = "0" + b;
+              return "#" + r + g + b;
+            }
+            const allButtons = document.querySelectorAll(
+              ".customizer-group .customizer-item"
+            );
+
+            changeColorAutomaticaly();
+          }
+          try {
+            let iteration = 0;
+            function initViewer(id, onReady) {
+              onReady(id);
+            }
+            if ("IntersectionObserver" in window) {
+              const IntObsOpts = {
+                rootMargin: "100px",
+                threshold: 0,
+              };
+              const callback = (entries, observer) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    switch (entry.target.id) {
+                      case "test":
+                        initViewer(entry.target.id, onReadyViewer);
+                        break;
+                      case "watch":
+                        initViewer(entry.target.id, onReadyWatch);
+                        break;
+                      case "viewer3":
+                        initViewer(entry.target.id, onReadyLast);
+                        break;
+                    }
+                    observer.unobserve(entry.target);
+                  }
+                });
+              };
+              const observer = new IntersectionObserver(callback, IntObsOpts);
+              const targets = document.querySelectorAll("vctr-viewer");
+              targets.forEach((target) => observer.observe(target));
+            } else {
+              await initViewer("test", onReadyViewer);
+              await initViewer("watch", onReadyWatch);
+              await initViewer("viewer3", onReadyLast);
+            }
+          } catch (e) {
+            errHandler(e);
+          }
+        }
+        run();
+      </script>
     </div>
     <div class="w-embed">
-        <style>
-            html {
-                font-size: 62.5%;
-            }
+      <style>
+        html {
+          font-size: 62.5%;
+        }
 
-            @media (max-width: 1230px) {
-                html {
-                    font-size: 52%;
-                }
-            }
-        </style>
+        @media (max-width: 1230px) {
+          html {
+            font-size: 52%;
+          }
+        }
+      </style>
     </div>
-
-</body>
-
+  </body>
 </html>

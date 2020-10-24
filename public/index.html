@@ -1,312 +1,686 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>React App</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
+    <link href="./css/vectary.css" rel="stylesheet" type="text/css" />
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="description" content="Web site created using create-react-app" />
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <title>React App</title>
-  <link href="https://fonts.googleapis.com/css?family=Raleway:500,700&display=swap" rel="stylesheet">
-  <!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
-  <link href="./css/vectary.css" rel="stylesheet" type="text/css">
+  <body>
+    <div id="root"></div>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
 
+    <div js="mouse-move-bounds" class="h-section h-section_arapi">
+      <div class="h-container">
+        <div class="h-section_text pointerevents h-section_text-row">
+          <h2
+            class="h-section_title h-section_title-center h-section_title-margin0"
+          >
+            Studio3D model configurator.
+          </h2>
+          <p class="h-section_p h-section_p-center h-section_p-margin0">
+            With the Studio3D model configurator you can dynamically change the
+            materials, the textures, the meshes and the properties of the model.
+          </p>
+        </div>
 
-</head>
+        <div class="h-arapiviewer">
+          <div class="h-ar-form">
+            <div class="h-customizer-subtitle">Color</div>
 
-<body>
-  <div id="root"></div>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
+            <div class="customizer-group">
+              <div class="customizer-item hue active w-embed">
+                <div id="hue-color"><span></span></div>
+                <input
+                  id="hue"
+                  type="range"
+                  min="0"
+                  max="350"
+                  value="340"
+                  step="1"
+                />
+                <input type="text" id="hue-hex" />
 
-  <div id="root"></div>
+                <style>
+                  :root {
+                    --hue-range-color: rgb(99, 54, 79);
+                  }
 
-  <!-- Hello -->
-  <div class="h-section h-section_arapi">
-    <div class="h-container">
-      <div class="h-section_text pointerevents h-section_text-row">
-        <h2 class="h-section_title h-section_title-center h-section_title-margin0">Studio3D model configurator.
-        </h2>
-        <p class="h-section_p h-section_p-center h-section_p-margin0">With the Studio3D model configurator you can
-          dynamically change the materials, the textures, the meshes and the properties of the model.</p>
-      </div>
-      <div class="h-arapiviewer">
-        <div class="h-ar-form">
-          <div class="h-customizer-subtitle">Color</div>
-          <div class="customizer-group">
-            <div class="customizer-item hue active w-embed">
-              <div id="hue-color"><span></span></div>
-              <input id="hue" type="range" min="0" max="350" value="340" step="1">
-              <input type="text" id="hue-hex">
+                  #hue-color {
+                    position: absolute;
+                    left: 85%;
+                    display: block;
+                    background: #a36b80;
+                    background: var(--hue-range-color);
+                    width: 22px;
+                    height: 40px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 12px;
+                    cursor: pointer;
+                    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+                    pointer-events: none;
+                  }
+
+                  #hue-color span {
+                    display: block;
+                    width: 2px;
+                    height: 12px;
+                    border-radius: 2px;
+                    background-color: rgba(255, 255, 255, 0.4);
+                  }
+
+                  #hue {
+                    width: 100%;
+                    height: 30px;
+                    border-radius: 2px;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    border: none;
+                    outline: none;
+                    margin: 0;
+                    outline: 0;
+                    background: transparent;
+                    cursor: pointer;
+                  }
+
+                  #hue::-webkit-slider-thumb {
+                    opacity: 0;
+                  }
+
+                  #hue::-moz-range-thumb {
+                    opacity: 0;
+                  }
+
+                  #hue::-ms-thumb {
+                    opacity: 0;
+                  }
+
+                  #hue::-webkit-slider-runnable-track {
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    border-radius: 2px;
+                    background: -moz-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* FF3.6+ */
+                    background: -webkit-gradient(
+                        linear,
+                        left top,
+                        right top,
+                        color-stop(0%, rgba(255, 0, 0, 0.3)),
+                        color-stop(16.66666666666667%, rgba(255, 255, 0, 0.3)),
+                        color-stop(33.33%, rgba(0, 255, 0, 0.3)),
+                        color-stop(50%, rgba(0, 255, 254, 0.3)),
+                        color-stop(66.66666666666667%, rgba(0, 0, 255, 0.3)),
+                        color-stop(83.33333333333333%, rgba(254, 0, 255, 0.3)),
+                        color-stop(100%, rgba(255, 0, 0, 0.3))
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Chrome,Safari4+ */
+                    background: -webkit-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Chrome10+,Safari5.1+ */
+                    background: -o-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Opera 11.10+ */
+                    background: -ms-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* IE10+ */
+                    background: linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* W3C */
+                    height: 3px;
+                  }
+
+                  #hue::-moz-range-track {
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    border-radius: 2px;
+                    background: -moz-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* FF3.6+ */
+                    background: -webkit-gradient(
+                        linear,
+                        left top,
+                        right top,
+                        color-stop(0%, rgba(255, 0, 0, 0.3)),
+                        color-stop(16.66666666666667%, rgba(255, 255, 0, 0.3)),
+                        color-stop(33.33%, rgba(0, 255, 0, 0.3)),
+                        color-stop(50%, rgba(0, 255, 254, 0.3)),
+                        color-stop(66.66666666666667%, rgba(0, 0, 255, 0.3)),
+                        color-stop(83.33333333333333%, rgba(254, 0, 255, 0.3)),
+                        color-stop(100%, rgba(255, 0, 0, 0.3))
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Chrome,Safari4+ */
+                    background: -webkit-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Chrome10+,Safari5.1+ */
+                    background: -o-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Opera 11.10+ */
+                    background: -ms-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* IE10+ */
+                    background: linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* W3C */
+                    height: 3px;
+                  }
+
+                  #hue::-ms-track {
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    border-radius: 2px;
+                    background: -moz-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* FF3.6+ */
+                    background: -webkit-gradient(
+                        linear,
+                        left top,
+                        right top,
+                        color-stop(0%, rgba(255, 0, 0, 0.3)),
+                        color-stop(16.66666666666667%, rgba(255, 255, 0, 0.3)),
+                        color-stop(33.33%, rgba(0, 255, 0, 0.3)),
+                        color-stop(50%, rgba(0, 255, 254, 0.3)),
+                        color-stop(66.66666666666667%, rgba(0, 0, 255, 0.3)),
+                        color-stop(83.33333333333333%, rgba(254, 0, 255, 0.3)),
+                        color-stop(100%, rgba(255, 0, 0, 0.3))
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Chrome,Safari4+ */
+                    background: -webkit-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Chrome10+,Safari5.1+ */
+                    background: -o-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* Opera 11.10+ */
+                    background: -ms-linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* IE10+ */
+                    background: linear-gradient(
+                        left,
+                        rgba(255, 0, 0, 0.3) 0%,
+                        rgba(255, 255, 0, 0.3) 16.66666666666667%,
+                        rgba(0, 255, 0, 0.3) 33.33%,
+                        rgba(0, 255, 254, 0.3) 50%,
+                        rgba(0, 0, 255, 0.3) 66.66666666666667%,
+                        rgba(254, 0, 255, 0.3) 83.33333333333333%,
+                        rgba(255, 0, 0, 0.3) 100%
+                      ),
+                      rgba(155, 155, 155, 0.7);
+                    /* W3C */
+                    height: 3px;
+                  }
+
+                  #hue-hex {
+                    display: none;
+                  }
+
+                  #color {
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 10px;
+                  }
+                </style>
+              </div>
+            </div>
+
+            <div class="h-customizer-subtitle">Base</div>
+            <div class="customizer-group">
+              <div class="customizer-item active" data-option="Metal1">
+                <div class="customizer-item-icon glossy"></div>
+                <div>Metal1</div>
+              </div>
+              <div class="customizer-item" data-option="Metal2">
+                <div class="customizer-item-icon matte"></div>
+                <div>Metal2</div>
+              </div>
+              <div class="customizer-item" data-option="Metal3">
+                <div class="customizer-item-icon rock"></div>
+                <div>Metal3</div>
+              </div>
+            </div>
+
+            <div class="h-customizer-subtitle">Pillow</div>
+            <div class="customizer-group">
+              <div class="customizer-item active" data-option="Pillow1">
+                <div class="customizer-item-icon light"></div>
+                <div>Pillow1</div>
+              </div>
+              <div class="customizer-item" data-option="Pillow2">
+                <div class="customizer-item-icon rock"></div>
+                <div>Pillow2</div>
+              </div>
+              <div class="customizer-item" data-option="Pillow3">
+                <div class="customizer-item-icon dark"></div>
+                <div>Pillow3</div>
+              </div>
+            </div>
+
+            <div class="h-customizer-subtitle">Wood</div>
+            <div class="customizer-group">
+              <div class="customizer-item active" data-option="Wood1">
+                <div class="customizer-item-icon light"></div>
+                <div>Wood1</div>
+              </div>
+              <div class="customizer-item" data-option="Wood2">
+                <div class="customizer-item-icon rock"></div>
+                <div>Wood2</div>
+              </div>
+              <div class="customizer-item" data-option="Wood3">
+                <div class="customizer-item-icon dark"></div>
+                <div>Wood3</div>
+              </div>
+            </div>
+
+            <div class="h-customizer-subtitle">Legs</div>
+            <div class="customizer-group">
+              <div id="legType2" class="customizer-item active center">
+                <div>Fiberglass Leg</div>
+              </div>
+              <div id="legType1" class="customizer-item center">
+                <div>Rod Frame</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="h-viewer_containerapi">
+            <div class="h-viewerarembed w-embed w-script">
               <style>
-                :root {
-                  --hue-range-color: rgb(99, 54, 79);
-                  ;
-                }
-
-                #hue-color {
-                  position: absolute;
-                  left: 85%;
-                  display: block;
-                  background: #A36B80;
+                .h-section.h-section_arapi {
                   background: var(--hue-range-color);
-                  width: 22px;
-                  height: 40px;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  border-radius: 12px;
-                  cursor: pointer;
-                  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
-                  pointer-events: none;
                 }
-
-                #hue-color span {
-                  display: block;
-                  width: 2px;
-                  height: 12px;
-                  border-radius: 2px;
-                  background-color: rgba(255, 255, 255, 0.4);
-                }
-
-                #hue {
-                  width: 100%;
-                  height: 30px;
-                  border-radius: 2px;
-                  -webkit-appearance: none;
-                  -moz-appearance: none;
-                  appearance: none;
-                  border: none;
-                  outline: none;
-                  margin: 0;
-                  outline: 0;
-                  background: transparent;
-                  cursor: pointer;
-                }
-
-                #hue::-webkit-slider-thumb {
-                  opacity: 0;
-                }
-
-                #hue::-moz-range-thumb {
-                  opacity: 0;
-                }
-
-                #hue::-ms-thumb {
-                  opacity: 0;
-                }
-
-                #hue::-webkit-slider-runnable-track {
-                  -webkit-appearance: none;
-                  -moz-appearance: none;
-                  appearance: none;
-                  border-radius: 2px;
-                  background: -moz-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                  /* FF3.6+ */
-                  background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 0, 0, 0.3)), color-stop(16.66666666666667%, rgba(255, 255, 0, 0.3)), color-stop(33.33%, rgba(0, 255, 0, 0.3)), color-stop(50%, rgba(0, 255, 254, 0.3)), color-stop(66.66666666666667%, rgba(0, 0, 255, 0.3)), color-stop(83.33333333333333%, rgba(254, 0, 255, 0.3)), color-stop(100%, rgba(255, 0, 0, 0.3))), rgba(155, 155, 155, 0.7);
-                  /* Chrome,Safari4+ */
-                  background: -webkit-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                  /* Chrome10+,Safari5.1+ */
-                  background: -o-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                  /* Opera 11.10+ */
-                  background: -ms-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                  /* IE10+ */
-                  background: linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                  /* W3C */
-                  height: 3px;
-                }
-
-                #hue::-moz-range-track {
-                  -webkit-appearance: none;
-                  -moz-appearance: none;
-                  appearance: none;
-                  border-radius: 2px;
-                  background: -moz-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                  /* FF3.6+ */
-                  background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 0, 0, 0.3)), color-stop(16.66666666666667%, rgba(255, 255, 0, 0.3)), color-stop(33.33%, rgba(0, 255, 0, 0.3)), color-stop(50%, rgba(0, 255, 254, 0.3)), color-stop(66.66666666666667%, rgba(0, 0, 255, 0.3)), color-stop(83.33333333333333%, rgba(254, 0, 255, 0.3)), color-stop(100%, rgba(255, 0, 0, 0.3))), rgba(155, 155, 155, 0.7);
-                  /* Chrome,Safari4+ */
-                  background: -webkit-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                  /* Chrome10+,Safari5.1+ */
-                  background: -o-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                  /* Opera 11.10+ */
-                  background: -ms-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                  /* IE10+ */
-                  background: linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                  /* W3C */
-                  height: 3px;
-                }
-
-                #hue::-ms-track {
-                  -webkit-appearance: none;
-                  -moz-appearance: none;
-                  appearance: none;
-                  border-radius: 2px;
-                  background: -moz-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                  /* FF3.6+ */
-                  background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 0, 0, 0.3)), color-stop(16.66666666666667%, rgba(255, 255, 0, 0.3)), color-stop(33.33%, rgba(0, 255, 0, 0.3)), color-stop(50%, rgba(0, 255, 254, 0.3)), color-stop(66.66666666666667%, rgba(0, 0, 255, 0.3)), color-stop(83.33333333333333%, rgba(254, 0, 255, 0.3)), color-stop(100%, rgba(255, 0, 0, 0.3))), rgba(155, 155, 155, 0.7);
-                  /* Chrome,Safari4+ */
-                  background: -webkit-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                  /* Chrome10+,Safari5.1+ */
-                  background: -o-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                  /* Opera 11.10+ */
-                  background: -ms-linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                  /* IE10+ */
-                  background: linear-gradient(left, rgba(255, 0, 0, 0.3) 0%, rgba(255, 255, 0, 0.3) 16.66666666666667%, rgba(0, 255, 0, 0.3) 33.33%, rgba(0, 255, 254, 0.3) 50%, rgba(0, 0, 255, 0.3) 66.66666666666667%, rgba(254, 0, 255, 0.3) 83.33333333333333%, rgba(255, 0, 0, 0.3) 100%), rgba(155, 155, 155, 0.7);
-                  /* W3C */
-                  height: 3px;
-                }
-
-                #hue-hex {
-                  display: none;
-                }
-
-                #color {
-                  width: 20px;
-                  height: 20px;
-                  margin-right: 10px;
+                .h-viewer_containerapi {
+                  --progress-bar-color: transparent;
+                  --poster-color: transparent;
+                  --progress-mask: transparent;
                 }
               </style>
+
+              <model-viewer
+                data-js-focus-visible=""
+                camera-orbit="225deg 55deg 1m"
+                style="width: 100%; height: 100%"
+                id="viewer3"
+                src=""
+                ar
+                ar-modes="webxr scene-viewer"
+                ar-scale="auto"
+                camera-controls
+                alt="A 3D model"
+              >
+              </model-viewer>
+            </div>
+
+            <div class="h-viewer_handler h-viewer_handler-top"></div>
+            <div class="h-viewer_handler h-viewer_handler-bottom"></div>
+            <div class="h-viewer_handler h-viewer_handler-left"></div>
+            <div class="h-viewer_handler"></div>
+          </div>
+        </div>
+        <div class="h-columns pointerevents">
+          <div class="h-column">
+            <div class="h-column_title">Object &amp; Material Changes</div>
+            <div class="h-column_p h-column_p-white">
+              Dynamically change scene lights, materials and all object
+              properties like visibility, rotation, position and scale.
             </div>
           </div>
 
-
-
-          <div class="h-customizer-subtitle">Base</div>
-
-          <div class="customizer-group">
-            <div class="customizer-item active" data-option="Metal1">
-              <div class="customizer-item-icon glossy"></div>
-              <div>Metal1</div>
-            </div>
-            <div class="customizer-item" data-option="Metal2">
-              <div class="customizer-item-icon matte"></div>
-              <div>Metal2</div>
-            </div>
-            <div class="customizer-item" data-option="Metal3">
-              <div class="customizer-item-icon rock"></div>
-              <div>Metal3</div>
+          <div class="h-column">
+            <div class="h-column_title">Animations</div>
+            <div class="h-column_p h-column_p-white">
+              Switch from pre-selected views, define orbits, animate objects or
+              build exploding views into your composition.
             </div>
           </div>
 
-
-
-          <div class="h-customizer-subtitle">Pillow</div>
-
-          <div class="customizer-group">
-            <div class="customizer-item active" data-option="Pillow1">
-              <div class="customizer-item-icon light"></div>
-              <div>Pillow1</div>
-            </div>
-            <div class="customizer-item" data-option="Pillow2">
-              <div class="customizer-item-icon rock"></div>
-              <div>Pillow2</div>
-            </div>
-            <div class="customizer-item" data-option="Pillow3">
-              <div class="customizer-item-icon dark"></div>
-              <div>Pillow3</div>
-            </div>
-          </div>
-
-
-
-          <div class="h-customizer-subtitle">Wood</div>
-
-          <div class="customizer-group">
-            <div class="customizer-item active" data-option="Wood1">
-              <div class="customizer-item-icon light"></div>
-              <div>Wood1</div>
-            </div>
-            <div class="customizer-item" data-option="Wood2">
-              <div class="customizer-item-icon rock"></div>
-              <div>Wood2</div>
-            </div>
-            <div class="customizer-item" data-option="Wood3">
-              <div class="customizer-item-icon dark"></div>
-              <div>Wood3</div>
-            </div>
-          </div>
-
-
-
-          <div class="h-customizer-subtitle">Legs</div>
-
-          <div class="customizer-group">
-            <div id="legType2" class="customizer-item active center">
-              <div>Fiberglass Leg</div>
-            </div>
-            <div id="legType1" class="customizer-item center">
-              <div>Rod Frame</div>
+          <div class="h-column">
+            <div class="h-column_title">Meta Operations</div>
+            <div class="h-column_p h-column_p-white">
+              Your entire scene is API accessible, allowing you to build
+              solutions like annotations attached to objects or even image
+              export.
             </div>
           </div>
         </div>
 
-
-
-
-
-
-
-
-        <div class="h-viewer_containerapi">
-          <div class="h-viewerarembed w-embed w-script">
-            <style>
-              .h-section.h-section_arapi {
-                background: var(--hue-range-color);
-                --progress-bar-color: transparent;
-                --poster-color: transparent;
-                --progress-mask: transparent;
-              }
-            </style>
-
-
-
-
-            <model-viewer data-js-focus-visible="" camera-orbit="225deg 55deg 1m" style="width: 100%; height: 100%;"
-              id="viewer3" src="" ar ar-modes="webxr scene-viewer" ar-scale="auto" camera-controls alt="A 3D model">
-            </model-viewer>
-            <script></script>
-          </div>
-
-        </div>
-      </div>
-      <div class="h-columns pointerevents">
-        <div class="h-column">
-          <div class="h-column_title">Object &amp; Material Changes</div>
-          <div class="h-column_p h-column_p-white">Dynamically change scene lights, materials and all object
-            properties like visibility, rotation, position and scale.</div>
-        </div>
-        <div class="h-column">
-          <div class="h-column_title">Animations</div>
-          <div class="h-column_p h-column_p-white">Switch from pre-selected views, define orbits, animate
-            objects or build exploding views into your composition.</div>
-        </div>
-        <div class="h-column">
-          <div class="h-column_title">Meta Operations</div>
-          <div class="h-column_p h-column_p-white">Your entire scene is API accessible, allowing you to build
-            solutions like annotations attached to objects or even image export.</div>
-        </div>
+        <div class="h-section_subbutton"></div>
       </div>
     </div>
 
-    <!-- Hello end -->
+    <div class="w-embed w-script">
+      <script>
+        async function run() {
+          async function onReadyLast(id) {
+            console.log("API ready..");
+            /******* Last 3D Viewer *******/
+            /* Set defaults */
+            // vctrApi.setVisibility("LegFb", true, false);
+            // vctrApi.setVisibility("LegRod", false, false);
+            let globalRotX = 0;
+            let globalRotY = 0;
+            const rangeTune = 0.8;
+            document
+              .querySelector(`#${id}`)
+              .closest('[js="mouse-move-bounds"')
+              .addEventListener("mousemove", async (e) => {
+                const normX = e.clientX / window.innerWidth;
+                const normY = e.clientY / window.innerHeight;
+                const rotX = rangeTune * (normX - 0.5);
+                const rotY = rangeTune * (normY - 0.5);
+                // vctrApi.rotateView([rotX - globalRotX, rotY - globalRotY]);
+                globalRotX = rotX;
+                globalRotY = rotY;
+              });
+            function changeMaterial(updatedMaterial) {
+              //   vctrApi.updateMaterial("LegFBShell1", updatedMaterial);
+              //   vctrApi.updateMaterial("LegFBShell2", updatedMaterial);
+              //   vctrApi.updateMaterial("Pillow1", updatedMaterial);
+              //   vctrApi.updateMaterial("Pillow2", updatedMaterial);
+              //   vctrApi.updateMaterial("LegRod1", updatedMaterial);
+              //   vctrApi.updateMaterial("LegRod2", updatedMaterial);
+            }
+
+            document.querySelector("#hue").addEventListener("input", (e) => {
+              const h = e.currentTarget.value;
+              const s = 30;
+              const l = 30;
+              const newColor = HSLAToHexA(h, s, l);
+              document.querySelector("#hue-hex").value = newColor;
+              document.querySelector(
+                "#hue-color"
+              ).style.backgroundColor = newColor;
+              document.querySelector(
+                ".h-section_arapi"
+              ).style.backgroundColor = newColor;
+              const updatedMaterial = { color: newColor };
+              changeMaterial(updatedMaterial);
+              setPositionToRangeHandler(newColor);
+            });
+            function changeColorAutomaticaly() {
+              let i = 0;
+              const interval = setInterval(function () {
+                const newColor = HSLAToHexA(i, 30, 30);
+                //$('#color').css('background-color', newColor);
+                document.querySelector("#hue").value = i;
+                changeMaterial({ color: newColor });
+                setPositionToRangeHandler(newColor);
+                i = i > 350 ? 0 : i + 1;
+              }, 50);
+              document
+                .querySelector("#hue")
+                .addEventListener("change", (_e) => {
+                  clearInterval(interval);
+                });
+              document
+                .querySelector("#hue")
+                .addEventListener("mousedown", (_e) => {
+                  clearInterval(interval);
+                });
+            }
+            function setPositionToRangeHandler(newColor) {
+              const sliderRange = document.querySelector("#hue").value;
+              const sliderPosition = 2.5 + (93 / 360) * sliderRange;
+              const sliderColor = newColor;
+              document.documentElement.style.setProperty(
+                "--hue-range-color",
+                sliderColor
+              );
+              document.querySelector("#hue-color").style.left =
+                sliderPosition + "%";
+            }
+            function HSLAToHexA(h, s, l) {
+              s /= 100;
+              l /= 100;
+              let c = (1 - Math.abs(2 * l - 1)) * s,
+                x = c * (1 - Math.abs(((h / 60) % 2) - 1)),
+                m = l - c / 2,
+                r = 0,
+                g = 0,
+                b = 0;
+              if (0 <= h && h < 60) {
+                r = c;
+                g = x;
+                b = 0;
+              } else if (60 <= h && h < 120) {
+                r = x;
+                g = c;
+                b = 0;
+              } else if (120 <= h && h < 180) {
+                r = 0;
+                g = c;
+                b = x;
+              } else if (180 <= h && h < 240) {
+                r = 0;
+                g = x;
+                b = c;
+              } else if (240 <= h && h < 300) {
+                r = x;
+                g = 0;
+                b = c;
+              } else if (300 <= h && h < 360) {
+                r = c;
+                g = 0;
+                b = x;
+              }
+              // Having obtained RGB, convert channels to hex
+              r = Math.round((r + m) * 255).toString(16);
+              g = Math.round((g + m) * 255).toString(16);
+              b = Math.round((b + m) * 255).toString(16);
+              if (r.length == 1) r = "0" + r;
+              if (g.length == 1) g = "0" + g;
+              if (b.length == 1) b = "0" + b;
+              return "#" + r + g + b;
+            }
+            const allButtons = document.querySelectorAll(
+              ".customizer-group .customizer-item"
+            );
+
+            changeColorAutomaticaly();
+          }
+          try {
+            let iteration = 0;
+            function initViewer(id, onReady) {
+              onReady(id);
+            }
+            if ("IntersectionObserver" in window) {
+              const IntObsOpts = {
+                rootMargin: "100px",
+                threshold: 0,
+              };
+              const callback = (entries, observer) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    switch (entry.target.id) {
+                      case "test":
+                        initViewer(entry.target.id, onReadyViewer);
+                        break;
+                      case "watch":
+                        initViewer(entry.target.id, onReadyWatch);
+                        break;
+                      case "viewer3":
+                        initViewer(entry.target.id, onReadyLast);
+                        break;
+                    }
+                    observer.unobserve(entry.target);
+                  }
+                });
+              };
+              const observer = new IntersectionObserver(callback, IntObsOpts);
+              const targets = document.querySelectorAll("model-viewer");
+              targets.forEach((target) => observer.observe(target));
+            } else {
+              await initViewer("test", onReadyViewer);
+              await initViewer("watch", onReadyWatch);
+              await initViewer("viewer3", onReadyLast);
+            }
+          } catch (e) {
+            errHandler(e);
+          }
+        }
+        run();
+      </script>
+    </div>
+
     <div class="w-embed">
       <style>
         html {
           font-size: 62.5%;
-          outline: 0 !important;
         }
 
         @media (max-width: 1230px) {
           html {
             font-size: 52%;
-            outline: 0 !important;
           }
         }
       </style>
     </div>
-
-</body>
-
+  </body>
 </html>
