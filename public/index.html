@@ -39,9 +39,40 @@
         </div>
 
         <div class="h-arapiviewer">
+          <div class="h-viewer_containerapi">
+            <div class="h-viewerarembed w-embed w-script">
+              <style>
+                /* div {
+                  outline: 1px solid red !important;
+                } */
+                .h-section.h-section_arapi {
+                  background: var(--hue-range-color);
+                }
+                .h-viewer_containerapi {
+                  --progress-bar-color: transparent;
+                  --poster-color: transparent;
+                  --progress-mask: transparent;
+                }
+              </style>
+
+              <model-viewer
+                data-js-focus-visible=""
+                camera-orbit="225deg 55deg 1m"
+                style="width: 100%; height: 100%"
+                id="viewer3"
+                src=""
+                ar
+                ar-modes="webxr scene-viewer"
+                ar-scale="auto"
+                camera-controls
+                alt="A 3D model"
+              >
+              </model-viewer>
+            </div>
+          </div>
+
           <div class="h-ar-form">
             <div class="h-customizer-subtitle">Color</div>
-
             <div class="customizer-group">
               <div class="customizer-item hue active w-embed">
                 <div id="hue-color"><span></span></div>
@@ -429,44 +460,8 @@
               </div>
             </div>
           </div>
-
-          <div class="h-viewer_containerapi">
-            <div class="h-viewerarembed w-embed w-script">
-              <style>
-                div {
-                  outline: 1px solid red !important;
-                }
-                .h-section.h-section_arapi {
-                  background: var(--hue-range-color);
-                }
-                .h-viewer_containerapi {
-                  --progress-bar-color: transparent;
-                  --poster-color: transparent;
-                  --progress-mask: transparent;
-                }
-              </style>
-
-              <model-viewer
-                data-js-focus-visible=""
-                camera-orbit="225deg 55deg 1m"
-                style="width: 100%; height: 100%"
-                id="viewer3"
-                src=""
-                ar
-                ar-modes="webxr scene-viewer"
-                ar-scale="auto"
-                camera-controls
-                alt="A 3D model"
-              >
-              </model-viewer>
-            </div>
-
-            <!-- <div class="h-viewer_handler h-viewer_handler-top"></div>
-            <div class="h-viewer_handler h-viewer_handler-bottom"></div>
-            <div class="h-viewer_handler h-viewer_handler-left"></div>
-            <div class="h-viewer_handler"></div> -->
-          </div>
         </div>
+
         <div class="h-columns pointerevents">
           <div class="h-column">
             <div class="h-column_title">Object &amp; Material Changes</div>
