@@ -3,6 +3,9 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { GLTFExporter } from "three/examples/jsm/exporters/GLTFExporter.js";
 import "@google/model-viewer/dist/model-viewer";
+// import fs from "fs";
+import fs from "fs";
+
 // import { Color } from 'three';
 // import 'react-app-polyfill/stable';
 
@@ -385,6 +388,15 @@ function Configurator() {
 
   // slide(slider, sliderItems);
 
+  //--
+  function blobToFile(theBlob, fileName) {
+    //A Blob() is almost a File() - it's just missing the two properties below which we will add
+    // fs.writeFile(fileName, theBlob, (err) => {
+    //   if (err) console.log(err);
+    //   console.log("Successfully Written to File.");
+    // });
+  }
+  //--
   function exportGLTF() {
     var gltfExporter = new GLTFExporter();
     gltfExporter.parse(
@@ -394,6 +406,35 @@ function Configurator() {
         let blob = new Blob([output], { type: "application/json" });
         let myBlob = URL.createObjectURL(blob);
         document.getElementById("viewer3").src = myBlob;
+
+        //
+        var reader = new FileReader();
+        console.log("blob: " + blob);
+
+        reader.readAsDataURL(blob);
+        reader.onloadend = function () {
+          var base64data = reader.result;
+          console.log("base64data: " + base64data);
+          //   fs.writeFile("2pac.gltf", base64data, (err) => {
+          //     // throws an error, you could also catch it here
+          //     if (err) throw err;
+
+          //     // success case, the file was saved
+          //     console.log("Lyric saved!");
+          //   });
+
+          //   fs = require("fs");
+          //   fs.writeFile("helloworld.txt", "Hello World!", function (err) {
+          //     if (err) return console.log(err);
+          //     console.log("Hello World > helloworld.txt");
+          //   });
+
+          //   var fs = require("fs");
+        };
+
+        //
+
+        //
       },
       allButtons
     );
